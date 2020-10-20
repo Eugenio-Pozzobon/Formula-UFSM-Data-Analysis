@@ -2,12 +2,13 @@ Bem vindo ao analisador de Dados CSV da Network Control Unit
 ---------------------------------------------------------------
 Rode o arquivo FUFSMpro_v0.1.exe
 
-Parar abrir um arquivo de log, precione sim na primeira tela de pergunta
+Para abrir um arquivo de log, precione sim na primeira tela de pergunta
 Selecione o log que deseja abrir
 Aguarde a geração do HTML no seu navegador, preferencialmente já esteja com o navegador aberto
 Em caso de bugs, erros, contate o desenvolvedor 
---------------------------------------
+
 Canais
+--------------------------------------
 time,
 CAN_ID,CAN_byte[0],CAN_byte[1],CAN_byte[2],CAN_byte[3],CAN_byte[4],CAN_byte[5],CAN_byte[6],CAN_byte[7],
 A_1,LVDTFL,LVDTRR,A_4,A_5,A_6,LVDTRL,LVDTFR,A_9,
