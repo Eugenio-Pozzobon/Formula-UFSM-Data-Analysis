@@ -43,7 +43,7 @@ def openNcuLog():
     root.withdraw()
 
     #Get the NCU file to start descompression
-    file_path_string_s = filedialog.askopenfilenames(initialdir = "./output/finalReport_ncu/20201014222317",title = "Select NCU Log file", filetypes=[("NCU file @Formula UFSM","*.ncu")])
+    file_path_string_s = filedialog.askopenfilenames(initialdir = "./output/finalReport_ncu/",title = "Select NCU Log file", filetypes=[("NCU file @Formula UFSM","*.ncu")])
                                             #names to get multiples archive
     # If someone file is selected, then:
     for file_path_string in file_path_string_s:
