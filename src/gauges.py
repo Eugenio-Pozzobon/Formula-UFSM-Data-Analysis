@@ -16,9 +16,11 @@ def data(value):
 
 
 def speed_to_angle(speed, units, offset = 0, max_value = 1):
-    speed = min(max(speed, offset), max_value)
+    speed = speed - offset
+    max_value = max_value - offset
+    speed = min(max(speed, 0), max_value)
     total_angle = start_angle - end_angle
-    angle = total_angle * float(speed) / max_value
+    angle = total_angle * float(speed) / (max_value)
     return start_angle - angle
 
 
@@ -88,7 +90,7 @@ def add_gauge(plot, radius, max_value, length, direction, color, major_step, min
     plot.add_glyph(source, glyph)
 
 def plotGauge(speedvalue, offset = 0, name = '', unit = '', color = '', maxValue = 0, major_step = 2, minor_step = .5):
-
+    maxValue = maxValue - offset
     xdr = Range1d(start=-1.25, end=1.25)
     ydr = Range1d(start=-1.25, end=1.25)
 
@@ -108,5 +110,9 @@ def plotGauge(speedvalue, offset = 0, name = '', unit = '', color = '', maxValue
 
     add_gauge(plt, 0.75, maxValue, 0.05, +1, color, major_step, minor_step, offset = offset)
 
+    valueGliph = Text(x=0, y=-0.6, text=["0"], text_color=color, text_align="center", text_baseline="top")
+
+    plt.add_glyph(valueGliph)
+
     a, b = add_needle(plt, speedvalue, unit, offset = offset, max_value = maxValue)
-    return plt, a, b
+    return plt, a, b, valueGliph

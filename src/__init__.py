@@ -10,10 +10,14 @@ __all__ = ["tabPilot",
            "tabEngine",
            "tabTTSU",
            "programTools",
-           "programGuiGui",
+           "programGui",
            "ncuOpenLOGfile",
-           "ncuOpenNCUReport",
+           "ncuOpenReport",
            "gauges",
            "wcuScreen",
-           "wcuSerial"
+           "wcuSerial",
+           "wcuServerSocket",
+           "wcuClientSocket",
+           "server_lifecycle",
+           "lic"
            ]

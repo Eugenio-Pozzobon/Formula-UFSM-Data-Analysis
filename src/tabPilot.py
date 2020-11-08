@@ -23,10 +23,10 @@ def pilot(data):
 
     #Set the datasets by the named col inside de csv log
     sensor_data = data['RPM']
-    sensor_data_b = data['SteeringAngle(deg)']
+    sensor_data_b = data['SteeringAngle']
     sensor_data_c = data['TPS']
-    sensor_data_d = data['BrakePressure(bar)']
-    sensor_data_e = data['Speed(Km/h)']
+    sensor_data_d = data['BrakePressure']
+    sensor_data_e = data['Speed']
 
     #forces the dataset to be recognizes as number
     sensor_data = pd.to_numeric(sensor_data)
@@ -41,19 +41,19 @@ def pilot(data):
     sensor_time = sensor_time/1000
 
     #create the figures. set axis, tools and title
-    p = figure(title = 'Engine RPM',
+    p = figure(title = 'Engine RPM', plot_width = 1500, plot_height = 300,
                x_axis_label = 's', y_axis_label = '°C', toolbar_location="left",
                tooltips=TOOLTIPS,
                output_backend=renderer,
                tools=graphTools,
                )
-    p1 = figure(title = 'Pedals',
+    p1 = figure(title = 'Pedals', plot_width = 1500, plot_height = 300,
                x_axis_label = 's', y_axis_label = '%', toolbar_location="left",
                tooltips=TOOLTIPS,
                output_backend=renderer,
                tools=graphTools,
                x_range=p.x_range)
-    p2 = figure(title = 'Steering',
+    p2 = figure(title = 'Steering', plot_width = 1500, plot_height = 300,
                x_axis_label = 's', y_axis_label = 'degree', toolbar_location="left",
                tooltips=TOOLTIPS,
                output_backend=renderer,

@@ -7,13 +7,17 @@ import gc
 from datetime import datetime
 import time
 
-import dask.dataframe as dd
+import pandas as pd
 import dask.array as da
 import csv
 import decimal
-import src.programTools
 
-def generateCSVfiles(log):
+from src.programTools import *
+
+def generateCSVfiles(log, configcan):
+    lastupdate = '0'
+    for channel in configcan['Channel']:
+            lastupdate = lastupdate + ',0'
     RPM=',0'
     Gear=',0'
     BatteryVoltage=',0'
@@ -94,7 +98,8 @@ def generateCSVfiles(log):
                                         else :
                                             rpmflag = False
                                     if rpmflag:
-                                        CAN = decodeCAN(lineS)
+                                        CAN = decodeCAN(lineS, configcan, lastupdate)
+                                        lastupdate = CAN
                                         if var1 < var2:
                                             filename = filename + 1
                                             counterline = 0
@@ -117,6 +122,7 @@ def generateCSVfiles(log):
 
 def parseLogFile():
 
+    CANconfig = pd.read_csv('./projectfolder/configuration/configCAN.csv', sep=';', index_col=False)
     # datetime object containing current date and time
     import tkinter as tk
     from tkinter import filedialog
@@ -147,7 +153,7 @@ def parseLogFile():
         path = 'finalReport_ncu/' + dt_string
         os.mkdir(path)
 
-        filecounter = generateCSVfiles(file_path_string)
+        filecounter = generateCSVfiles(file_path_string, CANconfig)
         for var in range(0,filecounter+1):
             csv_zip = zipfile.ZipFile(path+'/logFinal_part_'+str(var)+'.ncu', 'w')
             csv_zip.write('_ncu_cacheFiles_/logFinal_part_' + str(var) + '.csv', arcname='logFinal_part_' + str(var) + '.csv', compress_type=zipfile.ZIP_DEFLATED)

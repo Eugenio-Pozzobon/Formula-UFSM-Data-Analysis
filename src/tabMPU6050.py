@@ -1,4 +1,9 @@
-#my_first_plot.py
+# Author: Eugênio Pozzobon
+# e-mail: eugeniopp00@gmail.com
+# Github: https://github.com/Eugenio-Pozzobon
+# Linkedin: https://www.linkedin.com/in/eugeniopozzobon/
+# Licensed under the GNU General Public License v3.0
+
 from bokeh.plotting import figure, output_file
 from bokeh.io import show, output_notebook
 from bokeh.models import ColumnDataSource, BoxSelectTool, Legend, LinearAxis, Range1d
@@ -28,9 +33,9 @@ def mpu6050(data):
     sensor_data_a = data['GForceLat']
     sensor_data_b = -data['GForceLong']
     sensor_data_c = -data['gyro_z']
-    sensor_data_d = data['SteeringAngle(deg)']
-    sensor_data_e = data['Speed(Km/h)']
-    sensor_data_f = data['ECU_GForceLat(G)']
+    sensor_data_d = data['SteeringAngle']
+    sensor_data_e = data['Speed']
+    sensor_data_f = data['ECU_GForceLat']
 
     sensor_data_a = pd.to_numeric(sensor_data_a)
     sensor_data_b = pd.to_numeric(sensor_data_b)

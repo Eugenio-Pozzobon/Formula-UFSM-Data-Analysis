@@ -7,13 +7,15 @@ void setup() {
 
 }
 
+int ping = 0;
 void loop() {
+  ping++;
   // put your main code here, to run repeatedly:
-  if ((millis() - lastmillis) > 5) {
+  if ((millis() - lastmillis) > 29) {
     Serial.print(millis()); Serial.print(',');
     Serial.print(random(1000, 1011)); Serial.print(',');
     for (int i = 0; i < 8; i++) {
-      Serial.print(random(0, 6)); Serial.print(',');
+      Serial.print(random(1, 10)); Serial.print(',');
     }
     Serial.print('\n');
     lastmillis = millis();

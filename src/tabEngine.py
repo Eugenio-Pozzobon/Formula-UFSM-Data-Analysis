@@ -23,17 +23,17 @@ def engine(data):
     renderer = 'webgl'
     graphTools = 'pan,wheel_zoom,box_zoom,zoom_in,zoom_out,hover,crosshair,undo,redo,reset,save'
     sensor_data_a = data['RPM']
-    sensor_data_b = data['Speed(Km/h)']
+    sensor_data_b = data['Speed']
     sensor_data_c = data['TPS']
     sensor_data_d = data['Gear']
-    sensor_data_e = data['MAP(kpa)']
-    sensor_data_f = data['FuelPressure(bar)']
-    sensor_data_g = data['OilPressure(bar)']
+    sensor_data_e = data['MAP']
+    sensor_data_f = data['FuelPressure']
+    sensor_data_g = data['OilPressure']
     sensor_data_h = data['Lambda']
-    sensor_data_i = data['OilTemp(C)']
-    sensor_data_j = data['AirTemp(C)']
-    sensor_data_k = data['EngineTemp(C)']
-    sensor_data_l = data['RadOutTemp(C)']
+    sensor_data_i = data['OilTemp']
+    sensor_data_j = data['AirTemp']
+    sensor_data_k = data['EngineTemp']
+    sensor_data_l = data['RadOutTemp']
 
     sensor_data_a = pd.to_numeric(sensor_data_a)
     sensor_data_b = pd.to_numeric(sensor_data_b)
@@ -74,21 +74,21 @@ def engine(data):
                 tools=graphTools,
                 )
 
-    p3 = figure(title='Temperature',
+    p3 = figure(title='Temperature', plot_width = 1500, plot_height = 300,
                 x_axis_label='s', y_axis_label='°C', toolbar_location="below",
                 tooltips=TOOLTIPS,
                 x_range=p.x_range,
                 output_backend=renderer,
                 tools=graphTools,
                 )
-    p4 = figure(title='Lambda',
+    p4 = figure(title='Lambda', plot_width = 1500, plot_height = 300,
                 x_axis_label='s', y_axis_label='', toolbar_location="below",
                 tooltips=TOOLTIPS,
                 output_backend=renderer,
                 tools=graphTools,
                 )
 
-    p5 = figure(title='Gear',
+    p5 = figure(title='Gear', plot_width = 1500, plot_height = 300,
                 x_axis_label='s', y_axis_label='', toolbar_location="below",
                 tooltips=TOOLTIPS,
                 output_backend=renderer,

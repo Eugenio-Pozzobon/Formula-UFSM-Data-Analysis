@@ -1,24 +1,30 @@
-from src.ncuOpenLOGfile import *
-from src.ncuOpenNCUReport import *
-from src.programGui import *
-from src.wcuSerial import *
-from src.wcuScreen import *
-from src.gauges import *
+# Author: Eugênio Pozzobon
+# e-mail: eugeniopp00@gmail.com
+# Github: https://github.com/Eugenio-Pozzobon
+# Linkedin: https://www.linkedin.com/in/eugeniopozzobon/
+# Licensed under the GNU General Public License v3.0
 
-import time, threading
-import pandas as pd
+from src.ncuOpenLOGfile import *
+from src.ncuOpenReport import *
+from src.programGui import *
+from src.wcuScreen import *
+from src.lic import *
+
 import os, gc
+
 gc.enable()
 
-wcushow()
+if checkLicense():
 
-#--------
+    screen = getuserselection()
 
-'''
-function = initializeGui()
+    if screen == 'wcu':
+        runwcu()
+    if screen == 'ncu':
+        parseLogFile()
+    if screen == 'log':
+        openLog()
 
-if(function):
-    parseLogFile()
 else:
-    openNcuLog()
-'''
+    sys.exit('LICENSE required')
+#--------

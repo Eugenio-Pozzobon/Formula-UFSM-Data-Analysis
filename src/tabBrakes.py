@@ -1,4 +1,9 @@
-#my_first_plot.py
+# Author: Eugênio Pozzobon
+# e-mail: eugeniopp00@gmail.com
+# Github: https://github.com/Eugenio-Pozzobon
+# Linkedin: https://www.linkedin.com/in/eugeniopozzobon/
+# Licensed under the GNU General Public License v3.0
+
 from bokeh.plotting import figure, output_file
 from bokeh.io import show, output_notebook
 from bokeh.models import ColumnDataSource, BoxSelectTool, Legend, LinearAxis, Range1d
@@ -25,8 +30,8 @@ def TK(data):
     sensor_data_b = data['TKFR']
     sensor_data_c = data['TKRL']
     sensor_data_d = data['TKRR']
-    sensor_data_e = data['Speed(Km/h)']
-    sensor_data_f = data['BrakePressure(bar)']
+    sensor_data_e = data['Speed']
+    sensor_data_f = data['BrakePressure']
     sensor_data_g = data['GForceLat'] #LONGITUDINAL!
 
     sensor_data = pd.to_numeric(sensor_data)
