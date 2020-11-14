@@ -19,5 +19,6 @@ __all__ = ["tabPilot",
            "wcuServerSocket",
            "wcuClientSocket",
            "server_lifecycle",
-           "lic"
+           "lic",
+           "settings"
            ]

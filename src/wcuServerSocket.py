@@ -5,25 +5,25 @@
 # Licensed under the GNU General Public License v3.0
 
 import socket
+import src.settings as settings
 
-IP = '127.0.0.1'
-PORT = 8000
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-s.bind((IP, PORT))
-s.listen()
-s.settimeout(0.01)
-# s.setblocking(False)
+ser = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 clients = []
+
+def conectServer():
+    ser.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    ser.bind((settings.socketIP, settings.socketPort))
+    ser.listen()
+    ser.settimeout(0.01)
 
 def i_manage_clients(clients, data):    #Function to manage clients
     try:
         global rm
-        print(clients)
-        for client in clients:
-            rm = client
-            b = client.send(bytes(data.encode()))
-            print(client)
+
+        for c in clients:
+            rm = c
+            b = c.send(bytes(data.encode()))
+
     except ConnectionError:
         pass
         clients.remove(rm)

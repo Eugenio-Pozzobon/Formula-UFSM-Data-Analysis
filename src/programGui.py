@@ -11,50 +11,53 @@ import shutil
 import sys
 import gc
 
-import tkinter as tk
-#from tkinter import *
+from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog, messagebox
 
+import src.settings as settings
 
 def getuserselection():
-    '''
+
+    global window
+
     window = Tk()
 
     window.title("Formula UFSM Desktop APP")
 
     window.geometry('1080x720')
 
-    def clicked():
-        messagebox.showinfo('Message title', 'Message content')
 
-    btn = Button(window, text='Click here', command=clicked)
+    def WCUBUTTON():
+        global question
+        question = 'wcu'
+        window.destroy()
 
-    btn.grid(column=0, row=0)
+    def LOGBUTTON():
+        global question
+        question = 'log'
+        window.destroy()
+
+    def NCUBUTTON():
+        global question
+        question = 'ncu'
+        window.destroy()
+
+    btnwcu = Button(window, text='WCU', command=WCUBUTTON, width = 10, height = 3 )
+    btnlog = Button(window, text='LOG FILE', command=LOGBUTTON, width=10, height=3)
+    btnncu = Button(window, text='NCU', command=NCUBUTTON, width=10, height=3)
+
+    btnwcu.grid(column=0, row=10)
+    btnlog.grid(column=335, row=10)
+    btnncu.grid(column=720-50, row=10)
 
     window.mainloop()
 
-    root = tk.Tk()
-    root.iconbitmap("./projectfolder/icon.ico")
-    root.withdraw()
+    '''
+    import serial.tools.list_ports
+    ports = serial.tools.list_ports.comports(include_links=False)
+    portWCU = ports[0].device
+
     '''
 
-    #'''
-    question = messagebox.askquestion('Program setup', 'Are you looking for telemetry data?')
-    if question == 'yes':
-        return 'wcu'
-
-    question = messagebox.askquestion('Program setup', 'Are you looking for open files and display data?')
-    if question == 'yes':
-        return 'log'
-
-    question2 = messagebox.askquestion('Program setup', 'Are you looking for parses a CAN *.CSV files?')
-    if question == 'yes':
-        return 'ncu'
-    '''
-
-    return 'wcu'
-    return 'ncu'
-    return 'log'
-    '''
-    #exit()
+    return question

@@ -29,9 +29,17 @@ from src.wcuSerial import *
 from src.gauges import *
 from src.tabGPS import *
 from src.server_lifecycle import *
+import src.settings as settings
 
-def endwculog(filename):
+def endwculog():
+
+    try:
+        wcufileglobal.close()
+    except:
+        pass
+
     nowsave = datetime.now()
+
     dt_string = nowsave.strftime("%Y%m%d")
 
     dt_string2 = nowsave.strftime("%Y%m%d%H%M%S")
@@ -49,17 +57,21 @@ def endwculog(filename):
         os.mkdir(path)
 
     wcu_zip = zipfile.ZipFile(path + '/' + dt_string2 + '.wcu', 'w')
-    wcu_zip.write(filename, arcname=dt_string2 + '.csv',
+    wcu_zip.write(wcufilename, arcname=dt_string2 + '.csv',
                   compress_type=zipfile.ZIP_DEFLATED)
     wcu_zip.close()
 
-    shutil.rmtree('_wcu_cacheFiles_')
+    try:
+        shutil.rmtree('_wcu_cacheFiles_')
+    except:
+        pass
 
 def wcushow(doc):
 
     TOOLTIPS = [
         ("(x,y)", "($x, $y)"),
     ]
+
     renderer = 'webgl'
     graphTools = 'pan,wheel_zoom,box_zoom,zoom_in,zoom_out,hover,crosshair,undo,redo,reset,save'
 
@@ -83,19 +95,17 @@ def wcushow(doc):
         os.mkdir('./_wcu_cacheFiles_')
 
     #set COM port baudrate
-    baudrate = '115200'
+    baudrate = settings.boudrateselected
     wcuUpdateTimer = 1/5 #second -> 1/FPS
 
-    #list ports in hardware
-    import serial.tools.list_ports
-    ports = serial.tools.list_ports.comports(include_links=False)
-    portWCU = ports[0].device
+    portWCU = settings.port
 
     #conect to WDU and clean garbage
     comport = connectSerial(portWCU, baudrate)
     cleanCOMPORT(comport=comport)
 
     #create csv file for writing WCU data
+    global wcufilename
     wcufilename = createCSV(cabecalho)
 
     time.sleep(2) #to start serial, requires an delay to arduino load data at the buffer
@@ -172,11 +182,12 @@ def wcushow(doc):
     p.toolbar.logo = None
 
     #function for update all live gauges and graphics
+    global wcufileglobal
     def callback():
-        wcufile = open(wcufilename, "r")
-        lastline = (wcufile.readlines()[len(wcufile.readlines())-1])
+        wcufileglobal = open(wcufilename, "r")
+        lastline = (wcufileglobal.readlines()[len(wcufileglobal.readlines())-1])
         lastupdate = ',' + ','.join(lastline.split(',')[(-len(CANconfig['Channel'])):])
-        wcufile.close()
+        wcufileglobal.close()
 
         #alternative method
         #df = source.to_df()
@@ -210,6 +221,7 @@ def wcushow(doc):
         gpssource.data.update(x=lat, y=long)
         livesource.data.update(x=lat.iloc[-1:], y=long.iloc[-1:])
 
+    global per_call
     per_call = doc.add_periodic_callback(callback, wcuUpdateTimer*1000)
 
     '''
@@ -261,6 +273,12 @@ def wcushow(doc):
     Gauges = Panel(child=layoutGauges, title="Gauges", closable=True)
     Graphs = Panel(child=layoutGraphs, title="Graphs", closable=True, name = 'graphtab')
 
+    def cleanup_session(session_context):
+        ''' This function is called when a session is closed. '''
+        endWCU()
+
+    doc.on_session_destroyed(cleanup_session)
+
     tabs = Tabs(tabs=[
                     Gauges,
                     Graphs,
@@ -269,13 +287,10 @@ def wcushow(doc):
     doc.add_root(tabs)
     doc.title = 'WCU SCREEN'
 
-    def cleanup_session(session_context):
-        ''' This function is called when a session is closed. '''
-        doc.remove_periodic_callback(per_call)
-        endwculog(wcufilename)
-        sys.exit('Exit')
-
-    doc.on_session_destroyed(cleanup_session)
+def endWCU():
+    curdoc().remove_periodic_callback(per_call)
+    endwculog()
+    sys.exit('Exit')
 
 def checkall():
     try:
@@ -294,7 +309,7 @@ def runwcu():
 
         server = Server(
             {'/': wcushow},
-            port = 5006,
+            port = settings.bokehPort,
         )
 
         server.start()

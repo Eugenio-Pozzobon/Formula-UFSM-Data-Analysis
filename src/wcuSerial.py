@@ -9,21 +9,23 @@ import time, threading
 from datetime import datetime
 import serial
 
+import src.settings as settings
 from src.programTools import *
 from src.wcuServerSocket import *
 from src.wcuClientSocket import *
 
 import pandas as pd
 
-#define server and client
-server = False
-client = True
 
 #conect to serial selected
 def connectSerial(DEVICE, BAUD_RATE = 115200, TIMEOUT = .1):
-    if client == True:
+
+    if settings.server == True:
+        conectServer()
+
+    if settings.client == True:
         conectClient()
-    if client == False:
+    if settings.client == False:
         print('\nObtendo informacoes sobre a comunicacao serial\n')
         # Iniciando conexao serial
         # comport = serial.Serial(DEVICE, 9600, timeout=1)
@@ -96,7 +98,7 @@ def createCSV(header):
 
 #lê os dados, recodificia e salva no arquivo csv
 def saveCSV(file, comport, header, canconfig, laststring):
-    if(client):
+    if(settings.client):
         recieved = clientRecieve().decode().replace('\n','')
         stringSave = recieved.split(',')
         decoded = ',' + ','.join(stringSave[-26:])
@@ -107,7 +109,7 @@ def saveCSV(file, comport, header, canconfig, laststring):
         decoded = decodeCAN(FloatArray, canconfig, laststring)
         stringSave = (stringbytes + decoded).split(',')
 
-    if server:
+    if settings.server:
         sendSocket(','.join(stringSave)+'\n')
 
     if(len(stringSave) == len(header.split(','))):
@@ -119,13 +121,14 @@ def saveCSV(file, comport, header, canconfig, laststring):
 
 #salva o CSV e retorna o arquivo atualizado
 def updateWCUcsv(seconds, wcufile, comport, header, canconfig, laststring):
+
     start_time = time.time()
 
     cdc = pd.DataFrame(columns=header.split(','))
 
     laststr = laststring
     #entra no loop para ler o buffer da Serial, se for comunicação por socket não entra
-    if client == True:
+    if settings.client == True:
         laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
         # cdc = pd.DataFrame(data=[totalstr], columns=header.split(','))
 
@@ -146,7 +149,7 @@ def updateWCUcsv(seconds, wcufile, comport, header, canconfig, laststring):
             #cdc.append(totalstr)
 
             #save 2 lines of csv file because if don't, the first time that the funcition is called will et error
-            #if client:
+            #if settings.client:
             #    laststr = saveCSV(wcufile, comport, header, canconfig, laststr)
             #    laststr = saveCSV(wcufile, comport, header, canconfig, laststr)
 

@@ -4,26 +4,30 @@
 # Linkedin: https://www.linkedin.com/in/eugeniopozzobon/
 # Licensed under the GNU General Public License v3.0
 
-from src.ncuOpenLOGfile import *
-from src.ncuOpenReport import *
-from src.programGui import *
-from src.wcuScreen import *
-from src.lic import *
+import src.ncuOpenLOGfile as ncuOpenLOGfile
+import src.ncuOpenReport as ncuOpenReport
+import src.programGui as programGui
+import src.wcuScreen as wcuScreen
+import src.lic as lic
 
-import os, gc
+import src.settings as settings
+
+import os, gc, sys
 
 gc.enable()
 
-if checkLicense():
+settings.init()
 
-    screen = getuserselection()
+if lic.checkLicense():
+
+    screen = programGui.getuserselection()
 
     if screen == 'wcu':
-        runwcu()
+        wcuScreen.runwcu()
     if screen == 'ncu':
-        parseLogFile()
+        ncuOpenLOGfile.parseLogFile()
     if screen == 'log':
-        openLog()
+        ncuOpenReport.openLog()
 
 else:
     sys.exit('LICENSE required')
