@@ -28,7 +28,7 @@ def suspHisto(data):
     sensor_data_b = data['LVDTFR']
     sensor_data_c = data['LVDTRL']
     sensor_data_d = data['LVDTRR']
-    sensor_data_e = data['Speed(Km/h)']
+    sensor_data_e = data['Speed']
 
     sensor_data_a = pd.to_numeric(sensor_data_a)
     sensor_data_b = pd.to_numeric(sensor_data_b)

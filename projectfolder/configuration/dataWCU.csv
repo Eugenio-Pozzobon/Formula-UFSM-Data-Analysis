@@ -1,0 +1,37 @@
+channel;unit;color;minvalue;maxvalue;majorstep;minorstep;display
+time;;;;;;;False
+CAN_ID;;;;;;;False
+CAN_byte[0];;;;;;;False
+CAN_byte[1];;;;;;;False
+CAN_byte[2];;;;;;;False
+CAN_byte[3];;;;;;;False
+CAN_byte[4];;;;;;;False
+CAN_byte[5];;;;;;;False
+CAN_byte[6];;;;;;;False
+CAN_byte[7];;;;;;;False
+RPM;rpm;red;0;13000;2000;500;True
+Gear;;;;;;;False
+BatteryVoltage;V;green;7;16;2;1;True
+OilPressure;Bar;orange;0;10;2;1;True
+Speed;Km/h;blue;0;150;25;5;True
+TPS;%;green;0;100;25;5;True
+SteeringAngle;deg;black;-120;120;40;10;False
+ECU_GForceLat;;;;;;;False
+Lambda;;;;;;;False
+MAP;kpa;orange;0;100;20;10;True
+FuelPressure;bar;orange;0;10;2;1;True
+BrakePressure;bar;orange;0;260;130;65;True
+EngineTemp;C;purple;10;132;33;11;True
+OilTemp;C;purple;10;132;33;11;True
+AirTemp;C;purple;10;60;25;10;True
+RadOutTemp;C;purple;10;132;33;11;True
+GPSlatHW; ;;;;;;False
+GPSlatLW; ;;;;;;False
+GPSlongHW; ;;;;;;False
+GPSlongLW; ;;;;;;False
+PneuDianteiroInner;C;;;;;;False
+PneuDianteiroCenter;C;;;;;;False
+PneuDianteiroOuter;C;;;;;;False
+PneuTraseiroInner;C;;;;;;False
+PneuTraseiroCenter;C;;;;;;False
+PneuTraseiroOuter;C;;;;;;False

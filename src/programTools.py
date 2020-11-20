@@ -6,7 +6,8 @@ def restart_program():
     python = sys.executable
     os.execl(python, python, * sys.argv)
 
-def bandPassFilter(signal, cutf=5, order = 5):
+#make a filter
+def bandPassFilter(signal, cutf=5, order = 5, type = 'lowpass'):
     from scipy.signal import butter, lfilter, filtfilt
     fs = 200  # sample rate, Hz
     # Filter requirements.
@@ -14,7 +15,7 @@ def bandPassFilter(signal, cutf=5, order = 5):
     nyq = 1 * fs  # Nyquist Frequency
     normal_cutoff = cutoff / nyq
     # Get the filter coefficients
-    b, a  = butter(order, normal_cutoff, btype='lowpass', analog=False)
+    b, a  = butter(order, normal_cutoff, btype=type, analog=False)
     y = filtfilt(b, a , signal, axis=0)
     return y
 
@@ -46,3 +47,32 @@ def dbfft(time, y, ref=1):
     freq = np.arange((N / 2) + 1) / (float(N) / fs)  # Frequency axis
 
     return freq[:-1], s_dbfs
+
+#decode varibles by recieving CAN frame. It needs the CAN frame and the last decoded frame
+def decodeCAN(lineS, configtable, lastLine):
+
+    #take the last value and pass to final CAN varibles decoded,
+    # make this because one CAN frame doesnt update all varibles and the varibles
+    # that isnt update must be the same as the last reanden
+    lastlinearray = lastLine.split(',')
+    CAN = []
+    for value in lastlinearray:
+        CAN.append(value)
+
+    CAN.pop(0)
+
+    ctr = 0
+    linectr = 0
+    if len(lineS) == 10 :
+        for channel in configtable['Channel']:
+            line = configtable.iloc[ctr]
+            if float(lineS[1]) == line['ID']:
+                if(line['Bit_Mask'] == 1):
+                    CAN[line['Indice']] = str((float(lineS[2+line['Bytes']]) * 256 + float(lineS[3+line['Bytes']]))/(pow(10,line['Casas_decimais'])))
+                else:
+                    CAN[line['Indice']] = str(float(lineS[2+line['Bytes']])/(pow(10,line['Casas_decimais'])))
+            ctr = ctr+1
+
+    candecoded = ',' + ','.join(CAN)
+
+    return candecoded.replace('\n','')

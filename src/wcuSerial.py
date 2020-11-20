@@ -1,50 +1,163 @@
-# !/usr/bin/python
-# -*- coding: iso-8859-1 -*-
+# Author: Eugênio Pozzobon
+# e-mail: eugeniopp00@gmail.com
+# Github: https://github.com/Eugenio-Pozzobon
+# Linkedin: https://www.linkedin.com/in/eugeniopozzobon/
+# Licensed under the GNU General Public License v3.0
 
 import sys
-import time
+import time, threading
+from datetime import datetime
 import serial
 
-"""
-VARIAVEIS GLOBAIS (NESTE EXEMPLO)
-"""
+import src.settings as settings
+from src.programTools import *
+from src.wcuServerSocket import *
+from src.wcuClientSocket import *
 
-DEVICE = '/dev/ttyUSB0'
-BAUD_RATE = '9600'
-TIMEOUT = '1'
-PARITY = 'N'
-STOPBITS = '1'
-BYTESIZE = '8'
+import pandas as pd
 
 
-def InfoComSerial():
-    print
-    '\nObtendo informacoes sobre a comunicacao serial\n'
-    # Iniciando conexao serial
-    # comport = serial.Serial(DEVICE, 9600, timeout=1)
-    comport = serial.Serial(DEVICE,
-                            int(BAUD_RATE),
-                            timeout=int(TIMEOUT),
-                            bytesize=int(BYTESIZE),
-                            stopbits=int(STOPBITS),
-                            parity=PARITY)
-    # Alem das opcoes rtscts=BOOL, xonxoff=BOOL, e dsrdtr=BOOL
-    # Link: http://pyserial.sourceforge.net/pyserial_api.html#constants
-    time.sleep(1.8)  # Entre 1.5s a 2s
-    print
-    '\nStatus Porta: %s ' % (comport.isOpen())
-    print
-    'Device conectado: %s ' % (comport.name)
-    print
-    'Dump da configuracao:\n %s ' % (comport)
+#conect to serial selected
+def connectSerial(DEVICE, BAUD_RATE = 115200, TIMEOUT = .1):
 
-    print
-    '\n###############################################\n'
+    if settings.server == True:
+        conectServer()
 
-    # Fechando conexao serial
-    comport.close()
+    if settings.client == True:
+        conectClient()
+    if settings.client == False:
+        print('\nObtendo informacoes sobre a comunicacao serial\n')
+        # Iniciando conexao serial
+        # comport = serial.Serial(DEVICE, 9600, timeout=1)
+
+        try:
+            serial.Serial(DEVICE, int(BAUD_RATE), timeout=TIMEOUT)
+        except:
+            sys.exit('COM PORT ERROR, EXITING')
+
+        comport = serial.Serial(DEVICE,
+                                int(BAUD_RATE),
+                                timeout=TIMEOUT)
+        return comport
+
+#read serial in bytes
+def readSerial(comport, bytelen = 2):
 
 
-""" main """
-if __name__ == '__main__':
-    InfoComSerial()
+    read=True
+    try:
+        l = comport.readline()[:-bytelen]
+        print(l)
+    except:
+        read = False
+        #comport.close()
+        return bytes(('0,0,0,0,0,0,0,0,0,0').encode())
+
+    return l
+
+#check integrity of bytes read and return it string
+def readStringSerial(bytes):
+    read = True
+    try:
+        bytes.decode(errors='strict')
+    except:
+        read = False
+
+    string = ''
+    if(read):
+        string = bytes.decode(errors='strict')
+
+    return string
+
+#check if string readed is parsed to float and return the float array value of the string
+def readFloatArraySerial(string):
+    splitString = string.split(',')
+    read = True
+    try:
+        for i in range(0, len(splitString)):
+            fstr = float(splitString[i])
+    except:
+        read = False
+
+    fstr = []
+    if read:
+        for i in range(0, len(splitString)):
+            fstr.append(float(splitString[i]))
+    return fstr
+
+#creates csv file for save data during communications
+def createCSV(header):
+    now = datetime.now()
+    dt_string = now.strftime("%Y%m%d%H%M%S")
+    wcuFileName = "./_wcu_cacheFiles_/"+dt_string+"wcufile.csv"
+    wcuFile = open(wcuFileName, "w")
+    wcuFile.write(header+'\n')
+    wcuFile.close()
+
+    return wcuFileName
+
+#lê os dados, recodificia e salva no arquivo csv
+def saveCSV(file, comport, header, canconfig, laststring):
+    if(settings.client):
+        recieved = clientRecieve().decode().replace('\n','')
+        stringSave = recieved.split(',')
+        decoded = ',' + ','.join(stringSave[-26:])
+    else:
+        bytes = readSerial(comport, bytelen=2)
+        stringbytes = readStringSerial(bytes)
+        FloatArray = readFloatArraySerial(stringbytes)
+        decoded = decodeCAN(FloatArray, canconfig, laststring)
+        stringSave = (stringbytes + decoded).split(',')
+
+    if settings.server:
+        sendSocket(','.join(stringSave)+'\n')
+
+    if(len(stringSave) == len(header.split(','))):
+        file.write(','.join(stringSave)+'\n')
+        return decoded, stringSave
+    else:
+        return laststring, stringSave
+
+
+#salva o CSV e retorna o arquivo atualizado
+def updateWCUcsv(seconds, wcufile, comport, header, canconfig, laststring):
+
+    start_time = time.time()
+
+    cdc = pd.DataFrame(columns=header.split(','))
+
+    laststr = laststring
+    #entra no loop para ler o buffer da Serial, se for comunicação por socket não entra
+    if settings.client == True:
+        laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
+        # cdc = pd.DataFrame(data=[totalstr], columns=header.split(','))
+
+        laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
+        # cdc.append(totalstr)
+
+    else:
+        while (comport.in_waiting > 0):
+            current_time = time.time()
+            elapsed_time = current_time - start_time
+            if elapsed_time > seconds:
+                break
+
+            laststr, totalstr= saveCSV(wcufile, comport, header, canconfig, laststr)
+            #cdc = pd.DataFrame(data=[totalstr], columns=header.split(','))
+
+            laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
+            #cdc.append(totalstr)
+
+            #save 2 lines of csv file because if don't, the first time that the funcition is called will et error
+            #if settings.client:
+            #    laststr = saveCSV(wcufile, comport, header, canconfig, laststr)
+            #    laststr = saveCSV(wcufile, comport, header, canconfig, laststr)
+
+    wcufile.close()
+
+    return pd.read_csv(wcufile.name), laststr, cdc
+
+#read multiples line to dosnt use this
+def cleanCOMPORT(comport):
+    for i in range(0, 10):
+        bytes = readSerial(comport, bytelen=2)

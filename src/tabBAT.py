@@ -29,10 +29,10 @@ def BAT(data):
     graphTools = 'pan,wheel_zoom,box_zoom,zoom_in,zoom_out,hover,crosshair,undo,redo,reset,save'
 
     sensor_data = data['A_9_map']
-    sensor_data_b = data['BatteryVoltage(V)']
+    sensor_data_b = data['BatteryVoltage']
     sensor_data_c = data['RPM']
-    sensor_data_d = data['EngineTemp(C)']
-    sensor_data_e = data['Speed(Km/h)']
+    sensor_data_d = data['EngineTemp']
+    sensor_data_e = data['Speed']
 
     sensor_data = pd.to_numeric(sensor_data)
     sensor_data_b = pd.to_numeric(sensor_data_b)
@@ -55,33 +55,43 @@ def BAT(data):
     sensor_data_c.loc[sensor_data_c > 32.768] = sensor_data_c.loc[sensor_data_c > 32.768] - 65.536
     sensor_data_d.loc[sensor_data_d > 3276.8]= sensor_data_d.loc[sensor_data_d > 3276.8]-6553.6
 
-    p = figure(title = 'Battery Voltage & RPM',
-               x_axis_label = 's', y_axis_label = 'V', toolbar_location="below",
-               tooltips=TOOLTIPS,
-               output_backend=renderer,
-               tools=graphTools,
-               )
-    p1 = figure(title = 'Speed and Temperature',
-               x_axis_label = 's', y_axis_label = 'Km/h & °C', toolbar_location="below",
-               tooltips=TOOLTIPS,
-               output_backend=renderer,
-               x_range=p.x_range, y_range=p.y_range,
-               tools=graphTools,
-               )
-    p2 = figure(title = 'Fan Status',
-               x_axis_label = 's', y_axis_label = '', toolbar_location="below",
-               tooltips=TOOLTIPS,
-               output_backend=renderer,
-               x_range=p.x_range, y_range=p.y_range,
-               tools=graphTools,
-               )
+    p = figure(
+        title = 'Battery Voltage & RPM',
+        x_axis_label = 's', y_axis_label = 'V',
+        toolbar_location="below",
+        tooltips=TOOLTIPS,
+        output_backend=renderer,
+        tools=graphTools,
+    )
+    p1 = figure(
+        title = 'Speed and Temperature',
+        x_axis_label = 's', y_axis_label = 'Km/h & °C',
+        toolbar_location="below",
+        tooltips=TOOLTIPS,
+        output_backend=renderer,
+        x_range=p.x_range, y_range=p.y_range,
+        tools=graphTools,
+    )
+
+    p2 = figure(
+        title = 'Fan Status',
+        x_axis_label = 's', y_axis_label = '',
+        toolbar_location="below",
+        tooltips=TOOLTIPS,
+        output_backend=renderer,
+        x_range=p.x_range, y_range=p.y_range,
+        tools=graphTools,
+    )
+
     y_overlimit = 0.05  # show y axis below and above y min and max value
 
     p.y_range = Range1d(
-        sensor_data.min() * (1 - y_overlimit), sensor_data.max() * (1 + y_overlimit)
+        sensor_data.min() * (1 - y_overlimit),
+        sensor_data.max() * (1 + y_overlimit)
     )
     p.extra_y_ranges = {"b": Range1d(
-        sensor_data_c.min() * (1 - y_overlimit), sensor_data_c.max() * (1 + y_overlimit)
+        sensor_data_c.min() * (1 - y_overlimit),
+        sensor_data_c.max() * (1 + y_overlimit)
     )}
     p.add_layout(LinearAxis(y_range_name="b", axis_label="RPM"), 'right')
 
@@ -99,7 +109,6 @@ def BAT(data):
     g4 = p.line(sensor_time, ncuTools.bandPassFilter(sensor_data_b), color='green', line_width=2)
 
     g5 = p.line(sensor_time, sensor_data_c, color='red', y_range_name="b", line_width=2)
-
 
     g6 = p1.line(sensor_time, sensor_data_d, color='blue', line_width=2)
     g7 = p1.line(sensor_time, sensor_data_e, color='green', line_width=2)
@@ -137,7 +146,13 @@ def BAT(data):
     p1.toolbar.logo = None
     p2.toolbar.logo = None
 
-    grid = gridplot([[p], [p2], [p1]], plot_width=1450, plot_height=250, merge_tools=True, toolbar_location='left')
+    grid = gridplot(
+        [[p], [p2], [p1]],
+        plot_width=1450,
+        plot_height=250,
+        merge_tools=True,
+        toolbar_location='left'
+    )
 
     l1 = layout(grid)
 

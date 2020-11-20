@@ -1,4 +1,9 @@
-#my_first_plot.py
+# Author: Eugênio Pozzobon
+# e-mail: eugeniopp00@gmail.com
+# Github: https://github.com/Eugenio-Pozzobon
+# Linkedin: https://www.linkedin.com/in/eugeniopozzobon/
+# Licensed under the GNU General Public License v3.0
+
 from bokeh.plotting import figure, output_file
 from bokeh.io import show, output_notebook
 from bokeh.models import ColumnDataSource, BoxSelectTool, Legend, LinearAxis, Range1d
@@ -27,13 +32,13 @@ def LVDT(data):
     sensor_data_b = data['LVDTFR']
     sensor_data_c = data['LVDTRL']
     sensor_data_d = data['LVDTRR']
-    sensor_data_e = data['Speed(Km/h)']
+    sensor_data_e = data['Speed']
     sensor_data_x = -data['GForceLong']
     sensor_data_y = data['GForceLat']
     sensor_data_z = data['GForceVert']
     sensor_data_tps = data['TPS']
-    sensor_data_bp = data['BrakePressure(bar)']*10
-    sensor_data_sa = data['SteeringAngle(deg)']
+    sensor_data_bp = data['BrakePressure']
+    sensor_data_sa = data['SteeringAngle']
 
 
     sensor_data_a = pd.to_numeric(sensor_data_a)
