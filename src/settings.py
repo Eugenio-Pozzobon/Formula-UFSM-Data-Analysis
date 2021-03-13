@@ -15,8 +15,8 @@ def str_to_bool(s):
 def init():
     #define server and client
     global server, client, bokehPort, socketPort, socketIP, port, boudrateselected
-    server = str_to_bool('False')
-    client = str_to_bool('True')
+    server = str_to_bool('True')
+    client = str_to_bool('False')
     bokehPort = int('5006')
     socketPort = int('8080')
     socketIP = '127.0.0.1'

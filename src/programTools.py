@@ -51,8 +51,8 @@ def dbfft(time, y, ref=1):
 #decode varibles by recieving CAN frame. It needs the CAN frame and the last decoded frame
 def decodeCAN(lineS, configtable, lastLine):
 
-    #take the last value and pass to final CAN varibles decoded,
-    # make this because one CAN frame doesnt update all varibles and the varibles
+    # take the last value and pass to final CAN varibles decoded,
+    # make this because one CAN frame doesnt update all variables and the variables
     # that isnt update must be the same as the last reanden
     lastlinearray = lastLine.split(',')
     CAN = []
@@ -62,7 +62,6 @@ def decodeCAN(lineS, configtable, lastLine):
     CAN.pop(0)
 
     ctr = 0
-    linectr = 0
     if len(lineS) == 10 :
         for channel in configtable['Channel']:
             line = configtable.iloc[ctr]

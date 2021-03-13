@@ -18,33 +18,7 @@ def generateCSVfiles(log, configcan):
     lastupdate = '0'
     for channel in configcan['Channel']:
             lastupdate = lastupdate + ',0'
-    RPM=',0'
-    Gear=',0'
-    BatteryVoltage=',0'
-    OilPressure=',0'
-    Speed=',0'
-    TPS=',0'
-    SteeringAngle=',0'
-    ECU_GForceLat=',0'
-    Lambda=',0'
-    MAP=',0'
-    FuelPressure=',0'
-    BrakePressure=',0'
-    EngineTemp=',0'
-    OilTemp=',0'
-    AirTemp=',0'
-    RadOutTemp=',0'
-    GPSlatHW=',0'
-    GPSlatLW=',0'
-    GPSlongHW=',0'
-    GPSlongLW=',0'
-    PneuDianteiroInner=',0.0'
-    PneuDianteiroCenter=',0.0'
-    PneuDianteiroOuter=',0.0'
-    PneuTraseiroInner=',0.0'
-    PneuTraseiroCenter=',0.0'
-    PneuTraseiroOuter=',0.0'
-    cabecalho="time,CAN_ID,CAN_byte[0],CAN_byte[1],CAN_byte[2],CAN_byte[3],CAN_byte[4],CAN_byte[5],CAN_byte[6],CAN_byte[7],,A_1,LVDTFL,LVDTRR,A_4,A_5,A_6,LVDTRL,LVDTFR,A_9,,A_1_map,LVDTFLmap,LVDTRRmap,A_4_map,A_5_map,A_6_map,LVDTRLmap,LVDTFRmap,A_9_map,,O_1,O_2,O_3,,GForceLat,GForceLong,GForceVert,gyro_X,gyro_Y,gyro_z,,ncuTemp,atmelTemp,,sd_bps,fileSize,,max_enable,,TKRR,,TKRL,TKFR,TKFL,,RPM,Gear,BatteryVoltage(V),OilPressure(bar),Speed(Km/h),TPS,SteeringAngle(deg),ECU_GForceLat(G),Lambda,MAP(kpa),FuelPressure(bar),BrakePressure(bar),EngineTemp(C),OilTemp(C),AirTemp(C),RadOutTemp(C),GPSlatHW,GPSlatLW,GPSlongHW,GPSlongLW,PneuDianteiroInner,PneuDianteiroCenter,PneuDianteiroOuter,PneuTraseiroInner,PneuTraseiroCenter,PneuTraseiroOuter,\n"
+    cabecalho="time,CAN_ID,CAN_byte[0],CAN_byte[1],CAN_byte[2],CAN_byte[3],CAN_byte[4],CAN_byte[5],CAN_byte[6],CAN_byte[7],,A_1,LVDTFL,LVDTRR,A_4,A_5,A_6,LVDTRL,LVDTFR,A_9,,A_1_map,LVDTFLmap,LVDTRRmap,A_4_map,A_5_map,A_6_map,LVDTRLmap,LVDTFRmap,A_9_map,,O_1,O_2,O_3,,GForceLat,GForceLong,GForceVert,gyro_X,gyro_Y,gyro_z,,ncuTemp,atmelTemp,,sd_bps,fileSize,,max_enable,,TKRR,,TKRL,TKFR,TKFL,,RPM,Gear,BatteryVoltage,OilPressure,Speed,TPS,SteeringAngle,ECU_GForceLat,Lambda,MAP,FuelPressure,BrakePressure,EngineTemp,OilTemp,AirTemp,RadOutTemp,GPSlatHW,GPSlatLW,GPSlongHW,GPSlongLW,PneuDianteiroInner,PneuDianteiroCenter,PneuDianteiroOuter,PneuTraseiroInner,PneuTraseiroCenter,PneuTraseiroOuter,\n"
     rpmflag = False
     csvfile = open(log, 'rb').readlines()
     filename = 0
@@ -54,7 +28,7 @@ def generateCSVfiles(log, configcan):
     f = open('_ncu_cacheFiles_/logFinal_part_' + str(filename) + '.csv', "w")
     f.writelines(cabecalho)
     lineL = ['0', '0']
-    print('Starting file:' +str(print(filename)))
+    print('Starting file:' +str(filename))
     for i in range(len(csvfile)):
         exp = True
         try:
@@ -98,7 +72,7 @@ def generateCSVfiles(log, configcan):
                                         else :
                                             rpmflag = False
                                     if rpmflag:
-                                        CAN = decodeCAN(lineS, configcan, lastupdate)
+                                        CAN = decodeCAN(lineS[0:10], configcan, lastupdate)
                                         lastupdate = CAN
                                         if var1 < var2:
                                             filename = filename + 1
