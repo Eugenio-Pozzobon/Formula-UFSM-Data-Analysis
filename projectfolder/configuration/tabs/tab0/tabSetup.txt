@@ -1,0 +1,3 @@
+title:Thermocouple
+plots:2
+endfile

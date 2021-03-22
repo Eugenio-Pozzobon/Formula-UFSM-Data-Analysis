@@ -13,12 +13,28 @@ import csv
 import decimal
 
 from src.programTools import *
+import src.settings as settings
 
 def generateCSVfiles(log, configcan):
     lastupdate = '0'
     for channel in configcan['Channel']:
             lastupdate = lastupdate + ',0'
-    cabecalho="time,CAN_ID,CAN_byte[0],CAN_byte[1],CAN_byte[2],CAN_byte[3],CAN_byte[4],CAN_byte[5],CAN_byte[6],CAN_byte[7],,A_1,LVDTFL,LVDTRR,A_4,A_5,A_6,LVDTRL,LVDTFR,A_9,,A_1_map,LVDTFLmap,LVDTRRmap,A_4_map,A_5_map,A_6_map,LVDTRLmap,LVDTFRmap,A_9_map,,O_1,O_2,O_3,,GForceLat,GForceLong,GForceVert,gyro_X,gyro_Y,gyro_z,,ncuTemp,atmelTemp,,sd_bps,fileSize,,max_enable,,TKRR,,TKRL,TKFR,TKFL,,RPM,Gear,BatteryVoltage,OilPressure,Speed,TPS,SteeringAngle,ECU_GForceLat,Lambda,MAP,FuelPressure,BrakePressure,EngineTemp,OilTemp,AirTemp,RadOutTemp,GPSlatHW,GPSlatLW,GPSlongHW,GPSlongLW,PneuDianteiroInner,PneuDianteiroCenter,PneuDianteiroOuter,PneuTraseiroInner,PneuTraseiroCenter,PneuTraseiroOuter,\n"
+
+    cabecalho = ''
+    channelCounter = 0
+
+    for channel in settings.channels_config_propertise['Name']:
+        channelCounter = channelCounter + 1
+        if (len(settings.channels_config_propertise) > channelCounter):
+            cabecalho = cabecalho + channel + ','
+        else:
+            cabecalho = cabecalho + channel
+
+    print(cabecalho)
+    
+    #checkar as virgulas dobradas
+    # #cabecalho="time,CAN_ID,CAN_byte[0],CAN_byte[1],CAN_byte[2],CAN_byte[3],CAN_byte[4],CAN_byte[5],CAN_byte[6],CAN_byte[7],,A_1,LVDTFL,LVDTRR,A_4,A_5,A_6,LVDTRL,LVDTFR,A_9,,A_1_map,LVDTFLmap,LVDTRRmap,A_4_map,A_5_map,A_6_map,LVDTRLmap,LVDTFRmap,A_9_map,,O_1,O_2,O_3,,GForceLat,GForceLong,GForceVert,gyro_X,gyro_Y,gyro_z,,ncuTemp,atmelTemp,,sd_bps,fileSize,,max_enable,,TKRR,TKFL,TKRL,TKFR,,,RPM,Gear,BatteryVoltage,OilPressure,Speed,TPS,SteeringAngle,ECU_GForceLat,Lambda,MAP,FuelPressure,BrakePressure,EngineTemp,OilTemp,AirTemp,RadOutTemp,GPSlatHW,GPSlatLW,GPSlongHW,GPSlongLW,PneuDianteiroInner,PneuDianteiroCenter,PneuDianteiroOuter,PneuTraseiroInner,PneuTraseiroCenter,PneuTraseiroOuter,\n"
+
     rpmflag = False
     csvfile = open(log, 'rb').readlines()
     filename = 0
@@ -71,8 +87,8 @@ def generateCSVfiles(log, configcan):
                                             rpmflag = True
                                         else :
                                             rpmflag = False
-                                    if rpmflag:
-                                        CAN = decodeCAN(lineS[0:10], configcan, lastupdate)
+                                    if rpmflag | settings.ignore_rpm:
+                                        CAN = decodeCAN(lineS[1:10], configcan, lastupdate)
                                         lastupdate = CAN
                                         if var1 < var2:
                                             filename = filename + 1
@@ -106,7 +122,6 @@ def parseLogFile():
     root.withdraw()
 
     file_path_string = filedialog.askopenfilename(initialdir = "./logs",title = "Select Original CSV NCU log file",filetypes=[("CSV file","*.csv")])
-    print(file_path_string)
     logFileCSV='LOG.CSV'
 
     #filecounter = generateCSVfiles('logs/' + logFileCSV)
@@ -115,12 +130,14 @@ def parseLogFile():
         dt_string = now.strftime("%Y%m%d%H%M%S")
 
         if os.path.isdir('./_ncu_cacheFiles_'):
-            print('_ncu_cacheFiles_ ok')
+            #print('_ncu_cacheFiles_ ok')
+            pass
         else:
             os.mkdir('_ncu_cacheFiles_')
 
         if os.path.isdir('./finalReport_ncu'):
-            print('finalReport_ncu ok')
+            #print('finalReport_ncu ok')
+            pass
         else:
             os.mkdir('./finalReport_ncu')
 

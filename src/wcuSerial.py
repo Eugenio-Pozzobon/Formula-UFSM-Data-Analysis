@@ -15,7 +15,7 @@ from src.wcuServerSocket import *
 from src.wcuClientSocket import *
 
 import pandas as pd
-
+from time import process_time
 
 #conect to serial selected
 def connectSerial(DEVICE, BAUD_RATE = 115200, TIMEOUT = .1):
@@ -42,48 +42,36 @@ def connectSerial(DEVICE, BAUD_RATE = 115200, TIMEOUT = .1):
 
 #read serial in bytes
 def readSerial(comport, bytelen = 2):
-
-
-    read=True
     try:
-        l = comport.readline()[:-bytelen]
-        print(l)
+        l = comport.readline()
+        #print(l)
+        l = l[:-bytelen]
+        return l
     except:
-        read = False
         #comport.close()
-        return bytes(('0,0,0,0,0,0,0,0,0,0').encode())
+        return bytes(('0,0,0,0,0,0,0,0,0,0,0,0,0').encode())
 
-    return l
-
-#check integrity of bytes read and return it string
+#check integrity of bytes read and return it in string
 def readStringSerial(bytes):
-    read = True
-    try:
-        bytes.decode(errors='strict')
-    except:
-        read = False
-
     string = ''
-    if(read):
+    try:
+        string = ''
         string = bytes.decode(errors='strict')
 
-    return string
+        return string
+    except:
+        return string
 
 #check if string readed is parsed to float and return the float array value of the string
 def readFloatArraySerial(string):
     splitString = string.split(',')
-    read = True
+    fstr = []
     try:
         for i in range(0, len(splitString)):
-            fstr = float(splitString[i])
-    except:
-        read = False
-
-    fstr = []
-    if read:
-        for i in range(0, len(splitString)):
             fstr.append(float(splitString[i]))
-    return fstr
+        return fstr
+    except:
+        return fstr
 
 #creates csv file for save data during communications
 def createCSV(header):
@@ -98,15 +86,15 @@ def createCSV(header):
 
 #lê os dados, recodificia e salva no arquivo csv
 def saveCSV(file, comport, header, canconfig, laststring):
+
     if(settings.client):
         recieved = clientRecieve().decode().replace('\n','')
         stringSave = recieved.split(',')
         decoded = ',' + ','.join(stringSave[-26:])
     else:
-        bytes = readSerial(comport, bytelen=2)
-        stringbytes = readStringSerial(bytes)
-        FloatArray = readFloatArraySerial(stringbytes)
-        decoded = decodeCAN(FloatArray, canconfig, laststring)
+        stringbytes = readStringSerial(readSerial(comport, bytelen=2))
+        canStart = 1
+        decoded = decodeCAN(readFloatArraySerial(stringbytes)[canStart:(canStart + 9)], canconfig, laststring)
         stringSave = (stringbytes + decoded).split(',')
 
     if settings.server:
@@ -120,44 +108,25 @@ def saveCSV(file, comport, header, canconfig, laststring):
 
 
 #salva o CSV e retorna o arquivo atualizado
-def updateWCUcsv(seconds, wcufile, comport, header, canconfig, laststring):
+def updateWCUcsv(seconds, wcufile, comport, header, canconfig, laststr):
 
-    start_time = time.time()
-
-    cdc = pd.DataFrame(columns=header.split(','))
-
-    laststr = laststring
     #entra no loop para ler o buffer da Serial, se for comunicação por socket não entra
     if settings.client == True:
         laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
-        # cdc = pd.DataFrame(data=[totalstr], columns=header.split(','))
-
         laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
-        # cdc.append(totalstr)
 
     else:
+        t1_start = process_time()
         while (comport.in_waiting > 0):
-            current_time = time.time()
-            elapsed_time = current_time - start_time
-            if elapsed_time > seconds:
-                break
-
-            laststr, totalstr= saveCSV(wcufile, comport, header, canconfig, laststr)
-            #cdc = pd.DataFrame(data=[totalstr], columns=header.split(','))
-
             laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
-            #cdc.append(totalstr)
-
+            laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
             #save 2 lines of csv file because if don't, the first time that the funcition is called will et error
-            #if settings.client:
-            #    laststr = saveCSV(wcufile, comport, header, canconfig, laststr)
-            #    laststr = saveCSV(wcufile, comport, header, canconfig, laststr)
+        t1_stop = process_time()
+        print("Elapsed time during the whole program in seconds: {:.6f}".format((t1_stop - t1_start)))
 
-    wcufile.close()
-
-    return pd.read_csv(wcufile.name), laststr, cdc
+    return pd.read_csv(wcufile.name), laststr
 
 #read multiples line to dosnt use this
 def cleanCOMPORT(comport):
     for i in range(0, 10):
-        bytes = readSerial(comport, bytelen=2)
+        readSerial(comport, bytelen=2)

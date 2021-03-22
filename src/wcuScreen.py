@@ -10,10 +10,12 @@ from bokeh.io import curdoc
 from bokeh.models import Arc, Circle, ColumnDataSource, Plot, Range1d, Ray, Text, ImageURL, Image
 from bokeh.io import save, show, curdoc
 from bokeh.plotting import figure, output_file
+from bokeh.models import ImageURL
 from bokeh.models.widgets import Tabs, Panel
 from bokeh.themes import built_in_themes
 from bokeh.layouts import gridplot
-from bokeh.server.server import Server
+from bokeh.server.server import Server, BaseServer
+from bokeh.server.tornado import BokehTornado
 from bokeh.models.widgets import Button
 from bokeh.models import CustomJS, MultiSelect
 from bokeh.models import PreText
@@ -24,15 +26,23 @@ import pandas as pd
 import os, gc, sys
 from datetime import datetime
 
+import src.settings as settings
 from src.programGui import *
+from src.server_lifecycle import *
 from src.wcuSerial import *
 from src.gauges import *
+from src.graph import *
 from src.tabGPS import *
-from src.server_lifecycle import *
-import src.settings as settings
+
+from time import process_time
 
 def endwculog():
+    '''
+    end log files in WCU mode, compress to save and clear all cache files
+    :return: none
+    '''
 
+    #close file
     try:
         wcufileglobal.close()
     except:
@@ -44,6 +54,7 @@ def endwculog():
 
     dt_string2 = nowsave.strftime("%Y%m%d%H%M%S")
 
+    # make save directory
     if os.path.isdir('./finalReport_wcu'):
         pass
     else:
@@ -56,18 +67,25 @@ def endwculog():
     else:
         os.mkdir(path)
 
+    # compress log file
     wcu_zip = zipfile.ZipFile(path + '/' + dt_string2 + '.wcu', 'w')
     wcu_zip.write(wcufilename, arcname=dt_string2 + '.csv',
                   compress_type=zipfile.ZIP_DEFLATED)
     wcu_zip.close()
 
+    #clean cache files
     try:
         shutil.rmtree('_wcu_cacheFiles_')
     except:
         pass
 
 def wcushow(doc):
-
+    '''
+    bokeh function server
+    :param doc: bokeh document
+    :return: updated document
+    '''
+    doc.theme = settings.colortheme
     TOOLTIPS = [
         ("(x,y)", "($x, $y)"),
     ]
@@ -96,7 +114,7 @@ def wcushow(doc):
 
     #set COM port baudrate
     baudrate = settings.boudrateselected
-    wcuUpdateTimer = 1/5 #second -> 1/FPS
+    wcuUpdateTimer = 1/2#second -> 1/FPS
 
     portWCU = settings.port
 
@@ -116,10 +134,11 @@ def wcushow(doc):
         lastupdate = lastupdate + ',0.0'
 
     wcufile = open(wcufilename, "at")
-    data, lastupdate, cdc = updateWCUcsv(seconds = wcuUpdateTimer, wcufile = wcufile, comport = comport, header=cabecalho, canconfig= CANconfig, laststring = lastupdate)
+    data, lastupdate = updateWCUcsv(seconds = wcuUpdateTimer, wcufile = wcufile, comport = comport, header=cabecalho, canconfig= CANconfig, laststr = lastupdate)
     source = ColumnDataSource(data=data)
 
     # Start Gauges
+    gg = 0
 
     #start variables for an array of gauges
     plot = []
@@ -127,18 +146,31 @@ def wcushow(doc):
     linemax = []
     valueglyph = []
 
-    gg=0
     #for each channel listed in the wcucsv that have an 'true' marked on the display column,
     # there will be a plot
+    text_data_s = []
+    text_unit_s = []
+    text_name_s = []
+    text_color_s = []
+    texts = []
+    texplot = figure()
     for channel in WCUconfig['channel']:
         line = WCUconfig.iloc[gg]
-        if(line['display']):
+        if(line['display'] == 'gauge'):
             dataValue = pd.to_numeric(data[channel])[len(data[channel]) - 1]
             plt, mx, mi, vg = plotGauge(dataValue, unit = line['unit'], name = channel, color = line['color'], offset = line['minvalue'], maxValue = line['maxvalue'], major_step = line['majorstep'], minor_step = line['minorstep'])
             plot.append(plt)
             linemax.append(mx)
             linemin.append(mi)
             valueglyph.append(vg)
+        if (line['display'] == 'text'):
+            dataValue = pd.to_numeric(data[channel])[len(data[channel]) - 1]
+            text_data_s.append(dataValue)
+            text_unit_s.append(line['unit'])
+            text_name_s.append(channel)
+            text_color_s.append(line['color'])
+
+        texplot, texts = plot_text_data(text_data_s, unit = text_unit_s, name = text_name_s, color = text_color_s)
         gg = gg + 1
 
 
@@ -149,26 +181,7 @@ def wcushow(doc):
     livesource = livepoint.data_source
 
     #Steering for steering angle
-    sangle = figure(plot_height=300, plot_width=300, x_range=(0, 300), y_range=(0, 300))
-    #sangle.add_glyph(image)
-
-    #FormulaUFSM with WCU icon!
-    wcuIcon = figure(plot_height=300, plot_width=300, x_range=(0, 300), y_range=(0, 300))
-    #wcuIcon.image_url(url = [wcuIconUrl], x=150, y=150, w=290, h=290, anchor='center')
-
-    sangle.toolbar.logo = None
-    sangle.toolbar_location = None
-    sangle.xaxis.visible = None
-    sangle.yaxis.visible = None
-    sangle.xgrid.grid_line_color = None
-    sangle.ygrid.grid_line_color = None
-
-    wcuIcon.toolbar.logo = None
-    wcuIcon.toolbar_location = None
-    wcuIcon.xaxis.visible = None
-    wcuIcon.yaxis.visible = None
-    wcuIcon.xgrid.grid_line_color = None
-    wcuIcon.ygrid.grid_line_color = None
+    steering, steering_image, steering_text = plot_angle_image()
 
     # line plots: secondary tabs
     renderer = 'webgl'
@@ -183,45 +196,70 @@ def wcushow(doc):
 
     #function for update all live gauges and graphics
     global wcufileglobal
-    def callback():
-        wcufileglobal = open(wcufilename, "r")
-        lastline = (wcufileglobal.readlines()[len(wcufileglobal.readlines())-1])
+    def update_source():
+        df = source.to_df()
+        lastline = df.iloc[[df.ndim - 1]].to_csv(header=False, index=False).strip('\r\n')
         lastupdate = ',' + ','.join(lastline.split(',')[(-len(CANconfig['Channel'])):])
-        wcufileglobal.close()
 
+
+        wcufile = open(wcufilename, "at")
+
+        data, lastupdate = updateWCUcsv(seconds=wcuUpdateTimer, wcufile=wcufile, comport=comport, header=cabecalho, canconfig= CANconfig, laststr = lastupdate)
+
+        wcufile.close()
+
+        graph_points = 10000
+        if(len(data)>(graph_points+5)):
+            source.data=data.iloc[len(data)-graph_points:]
+        else:
+            source.data = data
+
+    def callback():
+        '''
+        callback function to update bokeh server
+        :return: none
+        '''
         #alternative method
-        #df = source.to_df()
+        data = source.to_df()
         #lastline = df.iloc[[df.ndim - 1]].to_csv(header=False, index=False).strip('\r\n')
         #lastupdate = ',' + ','.join(lastline.split(',')[(-len(CANconfig['Channel'])):])
 
-        wcufile = open(wcufilename, "at")
-        data, lastupdate, cdc = updateWCUcsv(seconds=wcuUpdateTimer, wcufile=wcufile, comport=comport, header=cabecalho, canconfig= CANconfig, laststring = lastupdate)
-
-        source.data=data
-        # alternative method
-        #source.stream(cdc)
-
         gg = 0
         linectr = 0
+        text_values_update = []
+        text_unit_s_update = []
+        text_name_s_update = []
         for channel in WCUconfig['channel']:
             line = WCUconfig.iloc[gg]
-            if (line['display']):
+            if (line['display'] == 'gauge'):
                 dataValue = pd.to_numeric(data[channel])[len(data[channel])-1]
-                angle = speed_to_angle(dataValue, line['unit'], offset = line['minvalue'], max_value = line['maxvalue'])
+                angle = speed_to_angle(dataValue, offset = line['minvalue'], max_value = line['maxvalue'])
                 linemax[linectr].update(angle = angle)
                 linemin[linectr].update(angle = angle - pi)
                 valueglyph[linectr].update(text = [str(round(dataValue, 1)) + ' ' + line['unit']])
                 linectr = linectr + 1
+
+            if (line['display'] == 'text'):
+                text_values_update.append(pd.to_numeric(data[channel])[len(data[channel]) - 1])
+                text_unit_s_update.append(line['unit'])
+                text_name_s_update.append(channel)
             gg = gg + 1
 
+        for i in range(0, len(texts)):
+            texts[i].update(text=[text_name_s_update[i] +': ' + str(text_values_update[i]) + text_unit_s_update[i]])
+
+
         steeringangle = pd.to_numeric(data['SteeringAngle'])[len(data['SteeringAngle'])-1]
-        #image.update(angle = steeringangle)
+        #steering_image.update(angle = steeringangle)
+        steering_text.update(text=['Steering Angle' + ': ' + str(steeringangle) + 'deg'])
 
         lat, long = latlong(data)
         gpssource.data.update(x=lat, y=long)
         livesource.data.update(x=lat.iloc[-1:], y=long.iloc[-1:])
 
+
     global per_call
+    per_call = doc.add_periodic_callback(update_source, wcuUpdateTimer*1001)
     per_call = doc.add_periodic_callback(callback, wcuUpdateTimer*1000)
 
     '''
@@ -239,19 +277,25 @@ def wcushow(doc):
     #pre = PreText(text="""Select Witch Channels to Watch""",width=500, height=100)
 
     def addGraph(attrname, old, new):
-        uptab = curdoc().get_model_by_name('graphtab')
+        '''
+        callback function to add graphs figure in the tab area for plotting
+        :param attrname:
+        :param old: old user selection
+        :param new: new user selected channels
+        :return: none
+        '''
+        uptab = doc.get_model_by_name('graphtab')
         for channel in old:
-            tb = curdoc().get_model_by_name('graphtab')
+            tb = doc.get_model_by_name('graphtab')
             if channel != '':
-                print(channel)
                 tb.child.children.remove(tb.child.children[len(tb.child.children) - 1])
         for channel in new:
             plot = figure(plot_height=300, plot_width=1300, title=channel,
-                       x_axis_label='s', y_axis_label=channel, toolbar_location="below",
-                       tooltips=TOOLTIPS,
-                       output_backend=renderer,
-                       tools=graphTools,
-                    name = channel
+                           x_axis_label='s', y_axis_label=channel, toolbar_location="below",
+                           tooltips=TOOLTIPS,
+                           output_backend=renderer,
+                           tools=graphTools,
+                           name = channel
                        )
             g = plot.line(x='time', y=channel, color='red', source=source)
             plot.toolbar.logo = None
@@ -268,15 +312,19 @@ def wcushow(doc):
     #addGraph()
     Graphs = (p)
     layoutGraphs = layout(row(Graphs, multi_select))
-    layoutGauges = layout(row(Gauges, column(track, sangle, wcuIcon)))
+    layoutGauges = layout(row(Gauges, column(track, steering, texplot)))
 
     Gauges = Panel(child=layoutGauges, title="Gauges", closable=True)
     Graphs = Panel(child=layoutGraphs, title="Graphs", closable=True, name = 'graphtab')
 
     def cleanup_session(session_context):
-        ''' This function is called when a session is closed. '''
+        '''
+        This function is called when a session is closed: callback function to end WCU Bokeh server
+        :return: none
+        '''
         endWCU()
 
+    #activate callback to detect when browser is closed
     doc.on_session_destroyed(cleanup_session)
 
     tabs = Tabs(tabs=[
@@ -286,13 +334,23 @@ def wcushow(doc):
 
     doc.add_root(tabs)
     doc.title = 'WCU SCREEN'
+    return doc
 
 def endWCU():
-    curdoc().remove_periodic_callback(per_call)
-    endwculog()
+    '''
+    end WCU server and software
+    :return: none
+    '''
+    #curdoc().remove_periodic_callback(per_call)
+    endwculog() #end and save log
     sys.exit('Exit')
 
 def checkall():
+    '''
+    check if COM Port is conected to run WCU
+    :return: boolean
+    '''
+
     try:
         import serial.tools.list_ports
         ports = serial.tools.list_ports.comports(include_links=False)
@@ -304,23 +362,31 @@ def checkall():
 
 
 def runwcu():
+    '''
+    run WCU Bokeh server
+    :return: none
+    '''
 
+    #check if WCU is ready to run
     if checkall():
 
+        #app = Application(FunctionHandler(wcushow))
         server = Server(
-            {'/': wcushow},
+            {'/formulaufsm_dataSoftware': wcushow},
             port = settings.bokehPort,
         )
 
         server.start()
         server.io_loop.add_callback(server.show, "/")
         server.io_loop.start()
+        server.prefix('/formulaufsm_dataSoftware/')
+
+        #alternative form
+        #bt = BokehTornado({'/': wcushow})
+        #baseserver = BaseServer(server.io_loop, bt, server._http)
+        #baseserver.start()
+        #baseserver.io_loop.start()
 
     else:
         sys.exit('CANT START, CHECK ALL')
-
-    # bt = BokehTornado({'/': wcushow})
-    # baseserver = BaseServer(server.io_loop,bt,server._http)
-    # baseserver.start()
-    # baseserver.io_loop.start()
 

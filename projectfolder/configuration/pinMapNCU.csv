@@ -42,7 +42,7 @@ sd_bps,sd_bps
 fileSize,fileSize
 max_enable,max_enable
 tk_1,TKRR
-tk_2,
+tk_2,TKFL
 tk_3,TKRL
 tk_4,TKFR
-tk_5,TKFL
+tk_5,

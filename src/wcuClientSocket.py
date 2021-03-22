@@ -12,26 +12,34 @@ import src.wcuScreen as wcuScreen
 cli = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def conectClient():
+    '''
+    conect to the server based on settings file
+    :return: none
+    '''
     cli.connect((settings.socketIP, settings.socketPort))
 
 def clientRecieve():
-    #lê o server até conseguir uma mensagem confiável
+    '''
+    read server until get an aceptable message
+    :return: none
+    '''
     while True:
         try:
             msg = cli.recv(1024)
 
-            ##Checa se a mensagem chegou inteira
+            # check message integrity
             splitmsg = msg.decode('utf8').split(',')
             do = True
             for value in splitmsg:
                 if value == '':
-                    vlue = '0'
+                    value = '0'
 
-            #se todos os bytes estão ali:
+            # if all bytes get recieved
             if(len(msg.decode('utf8').split(','))==(10+26)) & do:
                 print((','.join(splitmsg)).encode())
                 return (','.join(splitmsg)).encode()
         except:
+            # if server disconect, end program
             messagebox.showwarning(title='Connection Warning', message = 'Server disconect. Close the navegator tab to end the aplication')
             wcuScreen.endWCU()
             sys.exit('Exit')

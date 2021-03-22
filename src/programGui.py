@@ -18,8 +18,13 @@ from tkinter import filedialog, messagebox
 import src.settings as settings
 
 def getuserselection():
+    '''
+    Create the first screen to select between WCU, LOG, NCU mode for software
+    :return: user selection
+    '''
 
-    global window
+    global window, question
+    question = ''
 
     window = Tk()
 
@@ -27,7 +32,7 @@ def getuserselection():
 
     window.geometry('1080x720')
 
-
+    #define buttons functions
     def WCUBUTTON():
         global question
         question = 'wcu'
@@ -51,6 +56,7 @@ def getuserselection():
     btnlog.grid(column=335, row=10)
     btnncu.grid(column=720-50, row=10)
 
+    #run window
     window.mainloop()
 
     '''

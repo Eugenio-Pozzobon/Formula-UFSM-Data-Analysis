@@ -15,23 +15,23 @@ LVDTRR;LVDT RR;mm;200;5;
 A_4;A_4;V;200;0;
 A_5;A_5;V;200;0;
 A_6;A_6;V;200;0;
-LVDTRL;LVDT RL;mm;200;5;
-LVDTFR;LVDT FR;mm;200;5;
+LVDTRL;LVDT RL;mm;200;5;red
+LVDTFR;LVDT FR;mm;200;5;blue
 A_9;A_9;V;200;0;
 A_1_map;A_1_map;;200;0;
-LVDTFLmap;LVDTFLmap;mm;200;5;
-LVDTRRmap;LVDTRRmap;mm;200;5;
+LVDTFLmap;LVDTFLmap;mm;200;5;orange
+LVDTRRmap;LVDTRRmap;mm;200;5;green
 A_4_map;A_4_map;;200;0;
 A_5_map;A_5_map;;200;0;
 A_6_map;A_6_map;;200;0;
 LVDTRLmap;LVDTRLmap;mm;200;5;
 LVDTFRmap;LVDTFRmap;mm;200;5;
-A_9_map;A_9_map;V;200;0;
+A_9_map;A_9_map;V;200;0;blue
 O_1;O_1;;200;0;
 O_2;O_2;;200;0;
 O_3;O_3;;200;0;
-GForceLat;GForceLat;G;200;5;
-GForceLong;GForceLong;G;200;5;
+GForceLat;GForceLat;G;200;5;red
+GForceLong;GForceLong;G;200;5;green
 GForceVert;GForceVert;G;200;5;
 gyro_X;gyro_X;deg/s;200;5;
 gyro_Y;gyro_Y;deg/s;200;5;
@@ -41,10 +41,10 @@ atmelTemp;atmelTemp;C;200;0;
 sd_bps;sd_bps;bps;200;0;
 fileSize;fileSize;bytes;200;0;
 max_enable;max_enable;;200;0;
-TKRR;TKRR;C;2;0;
-TKRL;TKRL;C;2;0;
-TKFR;TKFR;C;2;0;
-TKFL;TKFL;C;2;0;
+TKRR;TKRR;C;2;0;green
+TKRL;TKRL;C;2;0;red
+TKFR;TKFR;C;2;0;blue
+TKFL;TKFL;C;2;0;orange
 RPM;RPM;rpm;35;0;red
 Gear;Gear;;35;0;
 BatteryVoltage;BatteryVoltage;V;35;0;green

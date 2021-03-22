@@ -1,0 +1,5 @@
+title:Thermocouples
+labels:s,°C,
+renderer:webgl
+graphTools:pan,wheel_zoom,box_zoom,zoom_in,zoom_out,hover,crosshair,undo,redo,reset,save,
+endfile

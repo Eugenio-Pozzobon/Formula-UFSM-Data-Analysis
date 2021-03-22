@@ -14,21 +14,28 @@ import src.settings as settings
 
 import os, gc, sys
 
+# enable RAM cleaner
 gc.enable()
 
+# get program settings
 settings.init()
 
+# check if user has license
 if lic.checkLicense():
 
+    # get user mode selection
     screen = programGui.getuserselection()
 
+    # run
     if screen == 'wcu':
         wcuScreen.runwcu()
     if screen == 'ncu':
         ncuOpenLOGfile.parseLogFile()
     if screen == 'log':
-        ncuOpenReport.openLog()
+        ncuOpenReport.startNCU() # file selection and descompression
+        ncuOpenReport.runLogAnalysis() # file analysis
 
 else:
+    #System out message
     sys.exit('LICENSE required')
 #--------

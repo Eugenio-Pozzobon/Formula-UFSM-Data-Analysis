@@ -1,4 +1,5 @@
 from math import cos, pi, sin
+import numpy as np
 
 from bokeh.io import show, output_notebook
 from bokeh.document import Document
@@ -6,16 +7,74 @@ from bokeh.embed import file_html
 from bokeh.models import Arc, Circle, ColumnDataSource, Plot, Range1d, Ray, Text
 from bokeh.resources import INLINE
 from bokeh.util.browser import view
+from bokeh.plotting import figure
+from bokeh.models import ImageURL
 
-start_angle = pi + pi/4
-end_angle = -pi/4
+def plot_angle_image():
+    xdr = Range1d(start=-1, end=1)
+    ydr = Range1d(start=-1, end=1)
+    plt = figure(x_range=xdr, y_range=ydr, plot_width=300, plot_height=300)
+    plt.outline_line_color = None
+
+    img_path_steering = 'formulaufsm_dataSoftware/static/steering.png'
+    image = ImageURL(url=[img_path_steering], x=0, y=0, w=2, global_alpha=1, angle=0, angle_units = 'deg', anchor="center")
+    plt.add_glyph(image)
+    image = 0
+
+    text = (Text(x=0, y=0, text=['Steering Angle' + ': ' + str(0) + 'deg'], text_color='black',
+                      text_align="center", text_baseline="top", text_font_style="bold"))
+    plt.add_glyph(text)
+
+    plt.toolbar.logo = None
+    plt.toolbar_location = None
+    plt.xaxis.visible = None
+    plt.yaxis.visible = None
+    plt.xgrid.grid_line_color = None
+    plt.ygrid.grid_line_color = None
+
+    return plt, image, text
+
+def plot_text_data(data, unit, name, color):
+    xdr = Range1d(start=-1, end=1)
+    ydr = Range1d(start=-1, end=1)
+    texts = []
+    plt = figure(x_range=xdr, y_range=ydr, plot_width=300, plot_height=300)
+    plt.outline_line_color = None
+
+    img_path = 'formulaufsm_dataSoftware/static/wcu.png'
+    image  = ImageURL(url=[img_path], x=0, y=0, w=2, global_alpha=.1, angle=0, angle_units = 'deg', anchor="center")
+    plt.add_glyph(image)
+
+    for i in range(0,len(name)):
+        texts.append(Text(x=-1+0.5, y=-0.2*i+0.5, text=[name[i] +': ' + str(data[i]) + unit[i]], text_color=color[i], text_align="left", text_baseline="top", text_font_style="bold"))
+        plt.add_glyph(texts[i])
+
+    plt.toolbar.logo = None
+    plt.toolbar_location = None
+    plt.xaxis.visible = None
+    plt.yaxis.visible = None
+    plt.xgrid.grid_line_color = None
+    plt.ygrid.grid_line_color = None
+
+    return plt, texts
 
 def data(value):
-    """Shorthand to override default units with "data", for e.g. `Ray.length`. """
+    """
+    Shorthand to override default units with "data", for e.g. `Ray.length`.
+    """
     return dict(value=value, units="data")
 
 
-def speed_to_angle(speed, units, offset = 0, max_value = 1):
+def speed_to_angle(speed, offset = 0, max_value = 1):
+    '''
+    Transform values in angle for pointers
+    :param speed: data value
+    :param offset: minimum possible value for the channel
+    :param max_value: maximum possible value for the channel
+    :return: angle
+    '''
+    start_angle = pi + pi / 4
+    end_angle = -pi / 4
     speed = speed - offset
     max_value = max_value - offset
     speed = min(max(speed, 0), max_value)
@@ -24,8 +83,8 @@ def speed_to_angle(speed, units, offset = 0, max_value = 1):
     return start_angle - angle
 
 
-def add_needle(plot, speed, units, offset = 0, max_value = 1):
-    angle = speed_to_angle(speed, units, offset, max_value)
+def add_needle(plot, speed, offset = 0, max_value = 1):
+    angle = speed_to_angle(speed, offset, max_value)
     rmax = Ray(x=0, y=0, length=data(0.75), angle=angle, line_color="black", line_width=3)
     rmin = Ray(x=0, y=0, length=data(0.10), angle=angle - pi, line_color="black", line_width=3)
     plot.add_glyph(rmax)
@@ -38,6 +97,23 @@ def polar_to_cartesian(r, alpha):
 
 
 def add_gauge(plot, radius, max_value, length, direction, color, major_step, minor_step, offset = 0):
+    '''
+    draw the gauge in plot area
+    :param plot:
+    :param radius:
+    :param max_value:
+    :param length:
+    :param direction:
+    :param color:
+    :param major_step:
+    :param minor_step:
+    :param offset:
+    :return:
+    '''
+
+    start_angle = pi + pi / 4
+    end_angle = -pi / 4
+
     major_angles, minor_angles = [], []
 
     total_angle = start_angle - end_angle
@@ -89,7 +165,22 @@ def add_gauge(plot, radius, max_value, length, direction, color, major_step, min
     glyph = Text(x="x", y="y", angle="angle", text="text", text_align="center", text_baseline="middle")
     plot.add_glyph(source, glyph)
 
-def plotGauge(speedvalue, offset = 0, name = '', unit = '', color = '', maxValue = 0, major_step = 2, minor_step = .5):
+def plotGauge(speedvalue, offset = 0,
+              name = '', unit = '', color = '', maxValue = 0,
+              major_step = 2, minor_step = .5):
+    '''
+    draw a gauge for show online data
+    :param speedvalue: data value for a especific channel
+    :param offset: offset is the minimum value of the channel
+    :param name: name of the channel
+    :param unit: units of the data value
+    :param color: color of the gauge
+    :param maxValue: max value of the chaneel
+    :param major_step: step for points inside the gauge
+    :param minor_step: step for points inside the gauge
+    :return: figure plot in bokeh engine
+    '''
+
     maxValue = maxValue - offset
     xdr = Range1d(start=-1.25, end=1.25)
     ydr = Range1d(start=-1.25, end=1.25)
@@ -114,5 +205,5 @@ def plotGauge(speedvalue, offset = 0, name = '', unit = '', color = '', maxValue
 
     plt.add_glyph(valueGliph)
 
-    a, b = add_needle(plt, speedvalue, unit, offset = offset, max_value = maxValue)
+    a, b = add_needle(plt, speedvalue, offset = offset, max_value = maxValue)
     return plt, a, b, valueGliph
