@@ -4,5 +4,5 @@ bokehPort:5006:
 socketPort:8080:
 socketIP:127.0.0.1:
 port:COM7:
-BoudRate:2000000:
+BoudRate:115200:
 ColorTheme:caliber:#Você pode escolher entre-> caliber (normal), night_sky,light_minimal, dark_minimal,c ontrast;

@@ -35,6 +35,7 @@ from src.graph import *
 from src.tabGPS import *
 
 from time import process_time
+from functools import partial
 
 def endwculog():
     '''
@@ -79,6 +80,9 @@ def endwculog():
     except:
         pass
 
+    global datapoints
+    datapoints = settings.telemetry_points
+
 def wcushow(doc):
     '''
     bokeh function server
@@ -114,7 +118,7 @@ def wcushow(doc):
 
     #set COM port baudrate
     baudrate = settings.boudrateselected
-    wcuUpdateTimer = 1/2#second -> 1/FPS
+    wcuUpdateTimer = 1/5#second -> 1/FPS
 
     portWCU = settings.port
 
@@ -129,6 +133,7 @@ def wcushow(doc):
     time.sleep(2) #to start serial, requires an delay to arduino load data at the buffer
     #get WDU data
 
+    global data, lastupdate
     lastupdate = '0.0'
     for channel in CANconfig['Channel']:
         lastupdate = lastupdate + ',0.0'
@@ -196,31 +201,55 @@ def wcushow(doc):
 
     #function for update all live gauges and graphics
     global wcufileglobal
-    def update_source():
-        df = source.to_df()
-        lastline = df.iloc[[df.ndim - 1]].to_csv(header=False, index=False).strip('\r\n')
-        lastupdate = ',' + ','.join(lastline.split(',')[(-len(CANconfig['Channel'])):])
-
-
-        wcufile = open(wcufilename, "at")
-
-        data, lastupdate = updateWCUcsv(seconds=wcuUpdateTimer, wcufile=wcufile, comport=comport, header=cabecalho, canconfig= CANconfig, laststr = lastupdate)
-
+    try:
         wcufile.close()
+        wcufile = open(wcufilename, "at")
+    except:
+        pass
 
-        graph_points = 10000
-        if(len(data)>(graph_points+5)):
-            source.data=data.iloc[len(data)-graph_points:]
-        else:
-            source.data = data
+    def update_data():
+        t1_start = process_time()
+        global data, lastupdate, lastline
+        lastline = data.iloc[[data.ndim - 1]].to_csv(header=False, index=False).strip('\r\n')
+        data, lastupdate = updateWCUcsv(seconds=wcuUpdateTimer, wcufile=wcufile, comport=comport, header=cabecalho, canconfig= CANconfig, laststr = lastupdate)
+        t1_stop = process_time()
+        print("HEY: {:.9f}".format((t1_stop - t1_start)))
+
+    def update_source():
+        t1_start = process_time()
+        source.data = data
+        t1_stop = process_time()
+        print("HEYHEYHEYHEYHEYHEY: {:.9f}".format((t1_stop - t1_start)))
+
 
     def callback():
         '''
         callback function to update bokeh server
         :return: none
         '''
+
+        #df = source.to_df()
+        #lastline = data.iloc[[df.ndim - 1]].to_csv(header=False, index=False).strip('\r\n')
+        #lastupdate = ',' + ','.join(lastline.split(',')[(-len(CANconfig['Channel'])):])
+        us = partial(update_source)
+        doc.add_next_tick_callback(us)
+
+        ud = partial(update_data)
+        doc.add_next_tick_callback(ud)
+
+
+        #wcufile = open(wcufilename, "at")
+        global data, lastupdate, lastline
+        #wcufile.close()
+
+        #graph_points = 500
+        #if(len(data)>(graph_points+5)):
+        #    source.data=data.iloc[len(data)-graph_points:]
+        #else:
+        #    source.data = data
+
         #alternative method
-        data = source.to_df()
+        #data = source.to_df()
         #lastline = df.iloc[[df.ndim - 1]].to_csv(header=False, index=False).strip('\r\n')
         #lastupdate = ',' + ','.join(lastline.split(',')[(-len(CANconfig['Channel'])):])
 
@@ -257,9 +286,8 @@ def wcushow(doc):
         gpssource.data.update(x=lat, y=long)
         livesource.data.update(x=lat.iloc[-1:], y=long.iloc[-1:])
 
-
     global per_call
-    per_call = doc.add_periodic_callback(update_source, wcuUpdateTimer*1001)
+    #per_call = doc.add_periodic_callback(update_source, wcuUpdateTimer*1001)
     per_call = doc.add_periodic_callback(callback, wcuUpdateTimer*1000)
 
     '''
@@ -284,6 +312,11 @@ def wcushow(doc):
         :param new: new user selected channels
         :return: none
         '''
+
+        global old_ch, new_ch
+        old_ch = old
+        new_ch = new
+
         uptab = doc.get_model_by_name('graphtab')
         for channel in old:
             tb = doc.get_model_by_name('graphtab')

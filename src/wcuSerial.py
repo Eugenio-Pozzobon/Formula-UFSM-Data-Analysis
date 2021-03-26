@@ -17,6 +17,29 @@ from src.wcuClientSocket import *
 import pandas as pd
 from time import process_time
 
+
+class ReadLine:
+    def __init__(self, s):
+        self.buf = bytearray()
+        self.s = s
+
+    def readline(self):
+        i = self.buf.find(b"\n")
+        if i >= 0:
+            r = self.buf[:i + 1]
+            self.buf = self.buf[i + 1:]
+            return r
+        while True:
+            i = max(1, min(2048, self.s.in_waiting))
+            data = self.s.read(i)
+            i = data.find(b"\n")
+            if i >= 0:
+                r = self.buf + data[:i + 1]
+                self.buf[0:] = data[i + 1:]
+                return r
+            else:
+                self.buf.extend(data)
+
 #conect to serial selected
 def connectSerial(DEVICE, BAUD_RATE = 115200, TIMEOUT = .1):
 
@@ -31,20 +54,22 @@ def connectSerial(DEVICE, BAUD_RATE = 115200, TIMEOUT = .1):
         # comport = serial.Serial(DEVICE, 9600, timeout=1)
 
         try:
-            serial.Serial(DEVICE, int(BAUD_RATE), timeout=TIMEOUT)
+            comport = serial.Serial(DEVICE,
+                                    int(BAUD_RATE),
+                                    timeout=TIMEOUT)
+            global rl, datapoints
+            datapoints = settings.telemetry_points
+            rl = ReadLine(comport)
+            return comport
         except:
             sys.exit('COM PORT ERROR, EXITING')
 
-        comport = serial.Serial(DEVICE,
-                                int(BAUD_RATE),
-                                timeout=TIMEOUT)
-        return comport
 
 #read serial in bytes
 def readSerial(comport, bytelen = 2):
     try:
-        l = comport.readline()
-        #print(l)
+        global rl
+        l = rl.readline()
         l = l[:-bytelen]
         return l
     except:
@@ -55,18 +80,16 @@ def readSerial(comport, bytelen = 2):
 def readStringSerial(bytes):
     string = ''
     try:
-        string = ''
         string = bytes.decode(errors='strict')
-
         return string
     except:
         return string
 
 #check if string readed is parsed to float and return the float array value of the string
 def readFloatArraySerial(string):
-    splitString = string.split(',')
     fstr = []
     try:
+        splitString = string.split(',')
         for i in range(0, len(splitString)):
             fstr.append(float(splitString[i]))
         return fstr
@@ -81,7 +104,8 @@ def createCSV(header):
     wcuFile = open(wcuFileName, "w")
     wcuFile.write(header+'\n')
     wcuFile.close()
-
+    global maxrow
+    maxrow = 0
     return wcuFileName
 
 #lê os dados, recodificia e salva no arquivo csv
@@ -93,8 +117,7 @@ def saveCSV(file, comport, header, canconfig, laststring):
         decoded = ',' + ','.join(stringSave[-26:])
     else:
         stringbytes = readStringSerial(readSerial(comport, bytelen=2))
-        canStart = 1
-        decoded = decodeCAN(readFloatArraySerial(stringbytes)[canStart:(canStart + 9)], canconfig, laststring)
+        decoded = decodeCAN(readFloatArraySerial(stringbytes)[1:(1 + 9)], canconfig, laststring)
         stringSave = (stringbytes + decoded).split(',')
 
     if settings.server:
@@ -102,6 +125,8 @@ def saveCSV(file, comport, header, canconfig, laststring):
 
     if(len(stringSave) == len(header.split(','))):
         file.write(','.join(stringSave)+'\n')
+        global maxrow
+        maxrow += 1
         return decoded, stringSave
     else:
         return laststring, stringSave
@@ -111,20 +136,29 @@ def saveCSV(file, comport, header, canconfig, laststring):
 def updateWCUcsv(seconds, wcufile, comport, header, canconfig, laststr):
 
     #entra no loop para ler o buffer da Serial, se for comunicação por socket não entra
+    global maxrow, datapoints
     if settings.client == True:
         laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
         laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
 
     else:
-        t1_start = process_time()
+
+
+
         while (comport.in_waiting > 0):
             laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
             laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
             #save 2 lines of csv file because if don't, the first time that the funcition is called will et error
-        t1_stop = process_time()
-        print("Elapsed time during the whole program in seconds: {:.6f}".format((t1_stop - t1_start)))
 
-    return pd.read_csv(wcufile.name), laststr
+    if maxrow < (datapoints+10):
+        return pd.read_csv(wcufile.name, engine = 'c'), laststr
+    else:
+        read_just_few_lines = []
+        for i in range(1, maxrow-(datapoints+1)):
+            read_just_few_lines.append(i)
+        dfr = pd.read_csv(wcufile.name, engine = 'c', skiprows=read_just_few_lines, nrows=datapoints)
+        return dfr, laststr
+
 
 #read multiples line to dosnt use this
 def cleanCOMPORT(comport):

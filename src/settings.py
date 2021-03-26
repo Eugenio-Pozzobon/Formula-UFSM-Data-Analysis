@@ -39,7 +39,8 @@ def init():
     setfile.close()
     channels_config_propertise = pd.read_csv('./projectfolder/configuration/channels.csv', sep = ';', index_col = 'Channel')
 
-    global ignore_rpm
+    global ignore_rpm, telemetry_points
+    telemetry_points = 1000
     ignore_rpm = True
 
 def updatesettings():
