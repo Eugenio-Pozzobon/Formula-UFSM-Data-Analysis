@@ -11,26 +11,26 @@ import shutil
 import sys
 import gc
 
-from tkinter import *
-from tkinter import messagebox
-from tkinter import filedialog, messagebox
+import tkinter as tk
 
 import src.settings as settings
+
+def start_app():
+    global window, question
+    question = ''
+
+    window = tk.Tk()
+    window.title("Formula UFSM Desktop APP")
+    window.geometry('1080x720')
+
+def get_update_preference():
+    tk.messagebox.askquestion('Update Available!', 'Do you wanna update for the next program version?')
 
 def getuserselection():
     '''
     Create the first screen to select between WCU, LOG, NCU mode for software
     :return: user selection
     '''
-
-    global window, question
-    question = ''
-
-    window = Tk()
-
-    window.title("Formula UFSM Desktop APP")
-
-    window.geometry('1080x720')
 
     #define buttons functions
     def WCUBUTTON():
@@ -48,9 +48,9 @@ def getuserselection():
         question = 'ncu'
         window.destroy()
 
-    btnwcu = Button(window, text='WCU', command=WCUBUTTON, width = 10, height = 3 )
-    btnlog = Button(window, text='LOG FILE', command=LOGBUTTON, width=10, height=3)
-    btnncu = Button(window, text='NCU', command=NCUBUTTON, width=10, height=3)
+    btnwcu = tk.Button(window, text='WCU', command=WCUBUTTON, width = 25, height = 3 )
+    btnlog = tk.Button(window, text='LOG (.WCU or .NCU FILES)', command=LOGBUTTON, width=25, height=3)
+    btnncu = tk.Button(window, text='NCU CAN CSV DATA', command=NCUBUTTON, width=25, height=3)
 
     btnwcu.grid(column=0, row=10)
     btnlog.grid(column=335, row=10)

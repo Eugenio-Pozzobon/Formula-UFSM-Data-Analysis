@@ -10,15 +10,18 @@ from bokeh.util.browser import view
 from bokeh.plotting import figure
 from bokeh.models import ImageURL
 
+from os.path import dirname, join
+
 def plot_angle_image():
     xdr = Range1d(start=-1, end=1)
     ydr = Range1d(start=-1, end=1)
     plt = figure(x_range=xdr, y_range=ydr, plot_width=300, plot_height=300)
     plt.outline_line_color = None
 
-    img_path_steering = 'formulaufsm_dataSoftware/static/steering.png'
-    image = ImageURL(url=[img_path_steering], x=0, y=0, w=2, global_alpha=1, angle=0, angle_units = 'deg', anchor="center")
-    plt.add_glyph(image)
+    #img_path_steering = 'formulaufsm_dataSoftware/static/images/steering.png'
+    #img_path_steering = join('E:', 'Git', 'formulaufsm_dataSoftware', 'static', 'images', 'steering.png')
+    #image = ImageURL(url=[img_path_steering], x=0, y=0, w=2, global_alpha=1, angle=0, angle_units = 'deg', anchor="center")
+    #plt.add_glyph(image)
     image = 0
 
     text = (Text(x=0, y=0, text=['Steering Angle' + ': ' + str(0) + 'deg'], text_color='black',
@@ -41,9 +44,12 @@ def plot_text_data(data, unit, name, color):
     plt = figure(x_range=xdr, y_range=ydr, plot_width=300, plot_height=300)
     plt.outline_line_color = None
 
-    img_path = 'formulaufsm_dataSoftware/static/wcu.png'
-    image  = ImageURL(url=[img_path], x=0, y=0, w=2, global_alpha=.1, angle=0, angle_units = 'deg', anchor="center")
-    plt.add_glyph(image)
+
+    #img_path = join(dirname(__file__), 'static','images','wcu.png')
+    #img_path = join('E:','Git', 'formulaufsm_dataSoftware', 'static', 'images', 'wcu.png')
+    #print(img_path)
+    #image  = ImageURL(url=[img_path], x=0, y=0, w=2, global_alpha=.1, angle=0, angle_units = 'deg', anchor="center")
+    #plt.add_glyph(image)
 
     for i in range(0,len(name)):
         texts.append(Text(x=-1+0.5, y=-0.2*i+0.5, text=[name[i] +': ' + str(data[i]) + unit[i]], text_color=color[i], text_align="left", text_baseline="top", text_font_style="bold"))

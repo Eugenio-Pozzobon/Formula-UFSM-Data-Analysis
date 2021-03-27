@@ -19,6 +19,7 @@ from bokeh.server.tornado import BokehTornado
 from bokeh.models.widgets import Button
 from bokeh.models import CustomJS, MultiSelect
 from bokeh.models import PreText
+from bokeh.models import Spinner
 
 from math import cos, pi, sin
 import time, threading
@@ -317,34 +318,43 @@ def wcushow(doc):
         old_ch = old
         new_ch = new
 
-        uptab = doc.get_model_by_name('graphtab')
-        for channel in old:
-            tb = doc.get_model_by_name('graphtab')
-            if channel != '':
-                tb.child.children.remove(tb.child.children[len(tb.child.children) - 1])
-        for channel in new:
-            plot = figure(plot_height=300, plot_width=1300, title=channel,
-                           x_axis_label='s', y_axis_label=channel, toolbar_location="below",
-                           tooltips=TOOLTIPS,
-                           output_backend=renderer,
-                           tools=graphTools,
-                           name = channel
-                       )
-            g = plot.line(x='time', y=channel, color='red', source=source)
-            plot.toolbar.logo = None
-            uptab.child.children.append(plot)
-
+        if len(new)<5:
+            uptab = doc.get_model_by_name('graphtab')
+            for channel in old:
+                tb = doc.get_model_by_name('graphtab')
+                if channel != '':
+                    tb.child.children.remove(tb.child.children[len(tb.child.children) - 1])
+            for channel in new:
+                plot = figure(plot_height=300, plot_width=1300, title=channel,
+                               x_axis_label='s', y_axis_label=channel, toolbar_location="below",
+                               tooltips=TOOLTIPS,
+                               output_backend=renderer,
+                               tools=graphTools,
+                               name = channel
+                           )
+                g = plot.line(x='time', y=channel, color='red', source=source)
+                plot.toolbar.logo = None
+                uptab.child.children.append(plot)
+        else:
+            raise('You cant add more then 5 graphics')
 
     OPTIONS = cabecalho.split(',')
     multi_select = MultiSelect(value=[''], options=OPTIONS, title = 'Select Channels', width=300, height=300)
     multi_select.on_change("value", addGraph)
+
+    def update_datapoints(attrname, old, new):
+        settings.telemetry_points = new
+
+    datasize_spinner = Spinner(title="Data Points Size", low=1000, high=10000, step=1000, value=2000, width=80)
+    datasize_spinner.on_change("value", update_datapoints)
+
 
     #make the grid plot of all gauges at the main tab
     Gauges = gridplot([[plot[0], plot[1], plot[4], plot[3]], [plot[6], plot[2], plot[5], plot[7]],[plot[8], plot[9], plot[10], plot[11]]],toolbar_options={'logo': None})
 
     #addGraph()
     Graphs = (p)
-    layoutGraphs = layout(row(Graphs, multi_select))
+    layoutGraphs = layout(row(Graphs, multi_select, datasize_spinner))
     layoutGauges = layout(row(Gauges, column(track, steering, texplot)))
 
     Gauges = Panel(child=layoutGauges, title="Gauges", closable=True)

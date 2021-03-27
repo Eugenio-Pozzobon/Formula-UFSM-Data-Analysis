@@ -57,8 +57,7 @@ def connectSerial(DEVICE, BAUD_RATE = 115200, TIMEOUT = .1):
             comport = serial.Serial(DEVICE,
                                     int(BAUD_RATE),
                                     timeout=TIMEOUT)
-            global rl, datapoints
-            datapoints = settings.telemetry_points
+            global rl
             rl = ReadLine(comport)
             return comport
         except:
@@ -136,7 +135,9 @@ def saveCSV(file, comport, header, canconfig, laststring):
 def updateWCUcsv(seconds, wcufile, comport, header, canconfig, laststr):
 
     #entra no loop para ler o buffer da Serial, se for comunicação por socket não entra
-    global maxrow, datapoints
+    global maxrow
+    datapoints = settings.telemetry_points
+
     if settings.client == True:
         laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
         laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)

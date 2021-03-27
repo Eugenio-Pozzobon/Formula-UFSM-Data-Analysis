@@ -4,6 +4,8 @@
 # Linkedin: https://www.linkedin.com/in/eugeniopozzobon/
 # Licensed under the GNU General Public License v3.0
 
+from update_check import isUpToDate
+
 import src.ncuOpenLOGfile as ncuOpenLOGfile
 import src.ncuOpenReport as ncuOpenReport
 import src.programGui as programGui
@@ -11,6 +13,11 @@ import src.wcuScreen as wcuScreen
 import src.lic as lic
 
 import src.settings as settings
+
+programGui.start_app()
+program_version = '3.2'
+if isUpToDate(__file__, "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/main.py?token=ANYFJRRYGHG6GBXUG5WDX3DAL3SJ4") == False:
+   programGui.get_update_preference()
 
 import os, gc, sys
 
