@@ -20,6 +20,7 @@ from bokeh.models.widgets import Button
 from bokeh.models import CustomJS, MultiSelect
 from bokeh.models import PreText
 from bokeh.models import Spinner
+from bokeh.models import RadioGroup
 
 from math import cos, pi, sin
 import time, threading
@@ -34,6 +35,7 @@ from src.wcuSerial import *
 from src.gauges import *
 from src.graph import *
 from src.tabGPS import *
+from src.userformula import *
 
 from time import process_time
 from functools import partial
@@ -161,20 +163,21 @@ def wcushow(doc):
     texts = []
     texplot = figure()
     for channel in WCUconfig['channel']:
-        line = WCUconfig.iloc[gg]
-        if(line['display'] == 'gauge'):
-            dataValue = pd.to_numeric(data[channel])[len(data[channel]) - 1]
-            plt, mx, mi, vg = plotGauge(dataValue, unit = line['unit'], name = channel, color = line['color'], offset = line['minvalue'], maxValue = line['maxvalue'], major_step = line['majorstep'], minor_step = line['minorstep'])
-            plot.append(plt)
-            linemax.append(mx)
-            linemin.append(mi)
-            valueglyph.append(vg)
-        if (line['display'] == 'text'):
-            dataValue = pd.to_numeric(data[channel])[len(data[channel]) - 1]
-            text_data_s.append(dataValue)
-            text_unit_s.append(line['unit'])
-            text_name_s.append(channel)
-            text_color_s.append(line['color'])
+        if(len(data[channel])>3): #remove errors
+            line = WCUconfig.iloc[gg]
+            if(line['display'] == 'gauge'):
+                dataValue = pd.to_numeric(data[channel])[len(data[channel]) - 1]
+                plt, mx, mi, vg = plotGauge(dataValue, unit = line['unit'], name = channel, color = line['color'], offset = line['minvalue'], maxValue = line['maxvalue'], major_step = line['majorstep'], minor_step = line['minorstep'])
+                plot.append(plt)
+                linemax.append(mx)
+                linemin.append(mi)
+                valueglyph.append(vg)
+            if (line['display'] == 'text'):
+                dataValue = pd.to_numeric(data[channel])[len(data[channel]) - 1]
+                text_data_s.append(dataValue)
+                text_unit_s.append(line['unit'])
+                text_name_s.append(channel)
+                text_color_s.append(line['color'])
 
         texplot, texts = plot_text_data(text_data_s, unit = text_unit_s, name = text_name_s, color = text_color_s)
         gg = gg + 1
@@ -209,18 +212,21 @@ def wcushow(doc):
         pass
 
     def update_data():
-        t1_start = process_time()
+        #t1_start = process_time()
         global data, lastupdate, lastline
         lastline = data.iloc[[data.ndim - 1]].to_csv(header=False, index=False).strip('\r\n')
         data, lastupdate = updateWCUcsv(seconds=wcuUpdateTimer, wcufile=wcufile, comport=comport, header=cabecalho, canconfig= CANconfig, laststr = lastupdate)
-        t1_stop = process_time()
-        print("HEY: {:.9f}".format((t1_stop - t1_start)))
+
+        #t1_stop = process_time()
+        #print("HEY: {:.9f}".format((t1_stop - t1_start)))
 
     def update_source():
-        t1_start = process_time()
+        #t1_start = process_time()
+        global data
+        data = wcu_equations(data)
         source.data = data
-        t1_stop = process_time()
-        print("HEYHEYHEYHEYHEYHEY: {:.9f}".format((t1_stop - t1_start)))
+        #t1_stop = process_time()
+        #print("HEYHEYHEYHEYHEYHEY: {:.9f}".format((t1_stop - t1_start)))
 
 
     def callback():
@@ -232,22 +238,14 @@ def wcushow(doc):
         #df = source.to_df()
         #lastline = data.iloc[[df.ndim - 1]].to_csv(header=False, index=False).strip('\r\n')
         #lastupdate = ',' + ','.join(lastline.split(',')[(-len(CANconfig['Channel'])):])
+
         us = partial(update_source)
         doc.add_next_tick_callback(us)
 
         ud = partial(update_data)
         doc.add_next_tick_callback(ud)
 
-
-        #wcufile = open(wcufilename, "at")
         global data, lastupdate, lastline
-        #wcufile.close()
-
-        #graph_points = 500
-        #if(len(data)>(graph_points+5)):
-        #    source.data=data.iloc[len(data)-graph_points:]
-        #else:
-        #    source.data = data
 
         #alternative method
         #data = source.to_df()
@@ -305,6 +303,10 @@ def wcushow(doc):
     '''
     #pre = PreText(text="""Select Witch Channels to Watch""",width=500, height=100)
 
+    global type_graph_option, graph_points_size
+    graph_points_size = 2
+    type_graph_option = 0
+
     def addGraph(attrname, old, new):
         '''
         callback function to add graphs figure in the tab area for plotting
@@ -315,16 +317,20 @@ def wcushow(doc):
         '''
 
         global old_ch, new_ch
-        old_ch = old
-        new_ch = new
+        if len(old) < 5 :
+            old_ch = old
+            new_ch = new
+        else:
+            new_ch = new
+
 
         if len(new)<5:
             uptab = doc.get_model_by_name('graphtab')
-            for channel in old:
+            for channel in old_ch:
                 tb = doc.get_model_by_name('graphtab')
                 if channel != '':
                     tb.child.children.remove(tb.child.children[len(tb.child.children) - 1])
-            for channel in new:
+            for channel in new_ch:
                 plot = figure(plot_height=300, plot_width=1300, title=channel,
                                x_axis_label='s', y_axis_label=channel, toolbar_location="below",
                                tooltips=TOOLTIPS,
@@ -332,11 +338,24 @@ def wcushow(doc):
                                tools=graphTools,
                                name = channel
                            )
-                g = plot.line(x='time', y=channel, color='red', source=source)
+                global type_graph_option, graph_points_size
+
+                if type_graph_option == 0:
+                    plot.line(x='time', y=channel, color='red', source=source)
+                if type_graph_option == 1:
+                    plot.circle(x='time', y=channel, color='red', source=source, size=graph_points_size)
                 plot.toolbar.logo = None
                 uptab.child.children.append(plot)
         else:
-            raise('You cant add more then 5 graphics')
+            error_2_wcu()
+
+    def radio_group_options(attrname, old, new):
+        global type_graph_option
+        type_graph_option = new
+
+    OPTIONS_LABEL = ["Line Graph", "Circle Points"]
+    radio_group = RadioGroup(labels=OPTIONS_LABEL, active=0)
+    radio_group.on_change("active", radio_group_options)
 
     OPTIONS = cabecalho.split(',')
     multi_select = MultiSelect(value=[''], options=OPTIONS, title = 'Select Channels', width=300, height=300)
@@ -344,17 +363,26 @@ def wcushow(doc):
 
     def update_datapoints(attrname, old, new):
         settings.telemetry_points = new
+        if(new>5000):
+            warning_1_wcu()
 
-    datasize_spinner = Spinner(title="Data Points Size", low=1000, high=10000, step=1000, value=2000, width=80)
+    datasize_spinner = Spinner(title="Data Points Size", low=1000, high=10000, step=1000, value=1000, width=80)
     datasize_spinner.on_change("value", update_datapoints)
 
+
+    def update_graph_points_size(attrname, old, new):
+        global graph_points_size
+        graph_points_size = new
+
+    graph_points_size_spinner = Spinner(title="Circle Size", low=1, high=10, step=1, value=graph_points_size, width=80)
+    datasize_spinner.on_change("value", update_graph_points_size)
 
     #make the grid plot of all gauges at the main tab
     Gauges = gridplot([[plot[0], plot[1], plot[4], plot[3]], [plot[6], plot[2], plot[5], plot[7]],[plot[8], plot[9], plot[10], plot[11]]],toolbar_options={'logo': None})
 
     #addGraph()
     Graphs = (p)
-    layoutGraphs = layout(row(Graphs, multi_select, datasize_spinner))
+    layoutGraphs = layout(row(Graphs, multi_select, column(datasize_spinner, radio_group, graph_points_size_spinner)))
     layoutGauges = layout(row(Gauges, column(track, steering, texplot)))
 
     Gauges = Panel(child=layoutGauges, title="Gauges", closable=True)
@@ -386,7 +414,7 @@ def endWCU():
     '''
     #curdoc().remove_periodic_callback(per_call)
     endwculog() #end and save log
-    sys.exit('Exit')
+    sys.exit()
 
 def checkall():
     '''
@@ -431,5 +459,7 @@ def runwcu():
         #baseserver.io_loop.start()
 
     else:
-        sys.exit('CANT START, CHECK ALL')
+        #input('CANT START, CHECK COM PORT AND ALL OPTIONS AT PROJECTFOLDER/SETTINGS.TXT.\n\nPress Enter to Exit')
+        error_1_wcu()
+        sys.exit()
 

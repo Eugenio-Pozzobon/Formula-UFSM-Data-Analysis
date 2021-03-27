@@ -136,3 +136,21 @@ def user_equations(data):
     return data
 
 
+def wcu_equations(data):
+    '''
+    Take data and process users equations in the entire database, reducing size poping inused columns.
+    :param data: pandas dataframe containing data
+    :return: pandas dataframe with updated data
+    '''
+
+    sensor_data = pd.to_numeric(data['SteeringAngle'])
+    sensor_data.loc[sensor_data > 3276.8] = sensor_data.loc[sensor_data > 3276.8] - 6553.6
+    data['SteeringAngle'] = sensor_data
+
+    sensor_data = pd.to_numeric(data['ECU_GForceLat'])
+    sensor_data.loc[sensor_data > 32.768] = sensor_data.loc[sensor_data > 32.768] - 65.536
+    data['ECU_GForceLat'] = sensor_data
+
+    data['time'] = data['time']/1000
+
+    return data

@@ -23,8 +23,36 @@ def start_app():
     window.title("Formula UFSM Desktop APP")
     window.geometry('1080x720')
 
+
+def call_lic():
+    root = tk.Tk()
+    root.withdraw()
+    tk.messagebox.showerror(title='Error', message='LICENSE FILE REQUIRED')
+    root.destroy()
+
+def error_1_wcu():
+    root = tk.Tk()
+    root.withdraw()
+    tk.messagebox.showerror(title='Error', message='CANT START, CHECK COM PORT AND ALL OPTIONS AT PROJECTFOLDER/SETTINGS.TXT.')
+    root.destroy()
+
+def error_2_wcu():
+    root = tk.Tk()
+    root.withdraw()
+    tk.messagebox.showerror(title='Error', message='You cant add more then 5 graphics')
+    root.destroy()
+
+def warning_1_wcu():
+    root = tk.Tk()
+    root.withdraw()
+    tk.messagebox.showerror(title='Error', message='You may have CPU delays with this value')
+    root.destroy()
+
 def get_update_preference():
+    root = tk.Tk()
+    root.withdraw()
     tk.messagebox.askquestion('Update Available!', 'Do you wanna update for the next program version?')
+    root.destroy()
 
 def getuserselection():
     '''

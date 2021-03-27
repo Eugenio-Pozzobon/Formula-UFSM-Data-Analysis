@@ -143,9 +143,6 @@ def updateWCUcsv(seconds, wcufile, comport, header, canconfig, laststr):
         laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
 
     else:
-
-
-
         while (comport.in_waiting > 0):
             laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)
             laststr, totalstr = saveCSV(wcufile, comport, header, canconfig, laststr)

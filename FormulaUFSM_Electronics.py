@@ -15,12 +15,16 @@ import src.lic as lic
 import src.settings as settings
 
 programGui.start_app()
-program_version = '3.2'
-if isUpToDate(__file__, "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/main.py") == False:
-   if programGui.get_update_preference():
-       update(__file__, "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/main.py")
 
-import os, gc, sys
+program_version = '3.2'
+
+'''
+if isUpToDate('./README.MD', "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/README.MD") == False:
+   if programGui.get_update_preference():
+       update('./README.MD', "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/README.MD")
+
+'''
+import gc, sys
 
 # enable RAM cleaner
 gc.enable()
@@ -45,5 +49,7 @@ if lic.checkLicense():
 
 else:
     #System out message
-    sys.exit('LICENSE required')
+    #input('LICENSE FILE REQUIRED\n\nPress Enter to Exit')
+    programGui.call_lic()
+    sys.exit()
 #--------
