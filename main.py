@@ -16,9 +16,9 @@ import src.settings as settings
 
 programGui.start_app()
 program_version = '3.2'
-if isUpToDate(__file__, "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/main.py?token=ANYFJRQTKRVB4D6ZDDSF2NTAL3SSM") == False:
+if isUpToDate(__file__, "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/main.py") == False:
    if programGui.get_update_preference():
-       update(__file__, "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/main.py?token=ANYFJRQTKRVB4D6ZDDSF2NTAL3SSM")
+       update(__file__, "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/main.py")
 
 import os, gc, sys
 
