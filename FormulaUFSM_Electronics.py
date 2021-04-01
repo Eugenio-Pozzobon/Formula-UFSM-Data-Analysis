@@ -13,43 +13,45 @@ import src.wcuScreen as wcuScreen
 import src.lic as lic
 
 import src.settings as settings
-
-programGui.start_app()
-
-program_version = '3.2'
-
-'''
-if isUpToDate('./README.MD', "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/README.MD") == False:
-   if programGui.get_update_preference():
-       update('./README.MD', "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/README.MD")
-
-'''
 import gc, sys
 
-# enable RAM cleaner
-gc.enable()
+#if __name__ == "main":
+if True:
+    programGui.start_app()
 
-# get program settings
-settings.init()
+    program_version = '3.2'
 
-# check if user has license
-if lic.checkLicense():
+    '''
+    if isUpToDate('./README.MD', "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/README.MD") == False:
+       if programGui.get_update_preference():
+           update('./README.MD', "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/README.MD")
+    
+    '''
 
-    # get user mode selection
-    screen = programGui.getuserselection()
+    # enable RAM cleaner
+    gc.enable()
 
-    # run
-    if screen == 'wcu':
-        wcuScreen.runwcu()
-    if screen == 'ncu':
-        ncuOpenLOGfile.parseLogFile()
-    if screen == 'log':
-        ncuOpenReport.startNCU() # file selection and descompression
-        ncuOpenReport.runLogAnalysis() # file analysis
+    # get program settings
+    settings.init()
 
-else:
-    #System out message
-    #input('LICENSE FILE REQUIRED\n\nPress Enter to Exit')
-    programGui.call_lic()
-    sys.exit()
+    # check if user has license
+    if lic.checkLicense():
+
+        # get user mode selection
+        screen = programGui.getuserselection()
+
+        # run
+        if screen == 'wcu':
+            wcuScreen.runwcu()
+        if screen == 'ncu':
+            ncuOpenLOGfile.parseLogFile()
+        if screen == 'log':
+            ncuOpenReport.startNCU() # file selection and descompression
+            ncuOpenReport.runLogAnalysis() # file analysis
+
+    else:
+        #System out message
+        #input('LICENSE FILE REQUIRED\n\nPress Enter to Exit')
+        programGui.call_lic()
+        sys.exit()
 #--------

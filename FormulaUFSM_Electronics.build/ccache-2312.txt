@@ -1,0 +1,457 @@
+[2021-04-01T17:09:03.498589 13528] === CCACHE 3.7.12 STARTED =========================================
+[2021-04-01T17:09:03.498589 13528] Config: (default) base_dir = 
+[2021-04-01T17:09:03.498589 13528] Config: (environment) cache_dir = C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-04-01T17:09:03.498589 13528] Config: (default) cache_dir_levels = 2
+[2021-04-01T17:09:03.498589 13528] Config: (default) compiler = 
+[2021-04-01T17:09:03.498589 13528] Config: (default) compiler_check = mtime
+[2021-04-01T17:09:03.498589 13528] Config: (default) compression = false
+[2021-04-01T17:09:03.498589 13528] Config: (default) compression_level = 6
+[2021-04-01T17:09:03.498589 13528] Config: (default) cpp_extension = 
+[2021-04-01T17:09:03.498589 13528] Config: (default) debug = false
+[2021-04-01T17:09:03.498589 13528] Config: (default) depend_mode = false
+[2021-04-01T17:09:03.498589 13528] Config: (default) direct_mode = true
+[2021-04-01T17:09:03.498589 13528] Config: (default) disable = false
+[2021-04-01T17:09:03.498589 13528] Config: (default) extra_files_to_hash = 
+[2021-04-01T17:09:03.498589 13528] Config: (default) hard_link = false
+[2021-04-01T17:09:03.498589 13528] Config: (default) hash_dir = true
+[2021-04-01T17:09:03.498589 13528] Config: (default) ignore_headers_in_manifest = 
+[2021-04-01T17:09:03.498589 13528] Config: (default) keep_comments_cpp = false
+[2021-04-01T17:09:03.498589 13528] Config: (default) limit_multiple = 0.8
+[2021-04-01T17:09:03.498589 13528] Config: (environment) log_file = E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build\ccache-2312.txt
+[2021-04-01T17:09:03.498589 13528] Config: (default) max_files = 0
+[2021-04-01T17:09:03.498589 13528] Config: (C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-04-01T17:09:03.498589 13528] Config: (default) path = 
+[2021-04-01T17:09:03.498589 13528] Config: (default) pch_external_checksum = false
+[2021-04-01T17:09:03.498589 13528] Config: (default) prefix_command = 
+[2021-04-01T17:09:03.498589 13528] Config: (default) prefix_command_cpp = 
+[2021-04-01T17:09:03.498589 13528] Config: (default) read_only = false
+[2021-04-01T17:09:03.498589 13528] Config: (default) read_only_direct = false
+[2021-04-01T17:09:03.498589 13528] Config: (default) recache = false
+[2021-04-01T17:09:03.498589 13528] Config: (default) run_second_cpp = true
+[2021-04-01T17:09:03.498589 13528] Config: (default) sloppiness = 
+[2021-04-01T17:09:03.498589 13528] Config: (default) stats = true
+[2021-04-01T17:09:03.498589 13528] Config: (default) temporary_dir = 
+[2021-04-01T17:09:03.498589 13528] Config: (default) umask = 
+[2021-04-01T17:09:03.499593 13528] Command line: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\eugen\AppData\Local\Nuitka\Nuitka\gcc\x86\10.2.0-11.0.0-8.0.0-r5\mingw32\bin\gcc.exe -o __constants.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=0 -D_NUITKA_EXE -IC:\Users\eugen\AppData\Local\Programs\Python\Python38-32\include -I. -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\include -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\static_src __constants.c
+[2021-04-01T17:09:03.903412 13528] Hostname: DESKTOP-D4OIEET
+[2021-04-01T17:09:03.903412 11276] === CCACHE 3.7.12 STARTED =========================================
+[2021-04-01T17:09:03.903412 8376 ] === CCACHE 3.7.12 STARTED =========================================
+[2021-04-01T17:09:03.903412 11804] === CCACHE 3.7.12 STARTED =========================================
+[2021-04-01T17:09:03.903412 14912] === CCACHE 3.7.12 STARTED =========================================
+[2021-04-01T17:09:03.903412 17352] === CCACHE 3.7.12 STARTED =========================================
+[2021-04-01T17:09:03.903412 13920] === CCACHE 3.7.12 STARTED =========================================
+[2021-04-01T17:09:03.903412 13528] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:03.903412 11276] Config: (default) base_dir = 
+[2021-04-01T17:09:03.903412 11276] Config: (environment) cache_dir = C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-04-01T17:09:03.903412 11276] Config: (default) cache_dir_levels = 2
+[2021-04-01T17:09:03.903412 11276] Config: (default) compiler = 
+[2021-04-01T17:09:03.903412 11276] Config: (default) compiler_check = mtime
+[2021-04-01T17:09:03.903412 11276] Config: (default) compression = false
+[2021-04-01T17:09:03.903412 11276] Config: (default) compression_level = 6
+[2021-04-01T17:09:03.903412 11276] Config: (default) cpp_extension = 
+[2021-04-01T17:09:03.903412 11276] Config: (default) debug = false
+[2021-04-01T17:09:03.903412 11276] Config: (default) depend_mode = false
+[2021-04-01T17:09:03.903412 11276] Config: (default) direct_mode = true
+[2021-04-01T17:09:03.903412 11276] Config: (default) disable = false
+[2021-04-01T17:09:03.903412 11276] Config: (default) extra_files_to_hash = 
+[2021-04-01T17:09:03.903412 11276] Config: (default) hard_link = false
+[2021-04-01T17:09:03.903412 11276] Config: (default) hash_dir = true
+[2021-04-01T17:09:03.903412 11276] Config: (default) ignore_headers_in_manifest = 
+[2021-04-01T17:09:03.903412 11276] Config: (default) keep_comments_cpp = false
+[2021-04-01T17:09:03.903412 11276] Config: (default) limit_multiple = 0.8
+[2021-04-01T17:09:03.903412 11276] Config: (environment) log_file = E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build\ccache-2312.txt
+[2021-04-01T17:09:03.903412 11276] Config: (default) max_files = 0
+[2021-04-01T17:09:03.903412 11276] Config: (C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-04-01T17:09:03.903412 11276] Config: (default) path = 
+[2021-04-01T17:09:03.903412 11276] Config: (default) pch_external_checksum = false
+[2021-04-01T17:09:03.903412 11276] Config: (default) prefix_command = 
+[2021-04-01T17:09:03.903412 11276] Config: (default) prefix_command_cpp = 
+[2021-04-01T17:09:03.903412 11276] Config: (default) read_only = false
+[2021-04-01T17:09:03.903412 11276] Config: (default) read_only_direct = false
+[2021-04-01T17:09:03.903412 11276] Config: (default) recache = false
+[2021-04-01T17:09:03.903412 11276] Config: (default) run_second_cpp = true
+[2021-04-01T17:09:03.903412 11276] Config: (default) sloppiness = 
+[2021-04-01T17:09:03.903412 11276] Config: (default) stats = true
+[2021-04-01T17:09:03.903412 11276] Config: (default) temporary_dir = 
+[2021-04-01T17:09:03.903412 11276] Config: (default) umask = 
+[2021-04-01T17:09:03.903412 11276] Command line: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\eugen\AppData\Local\Nuitka\Nuitka\gcc\x86\10.2.0-11.0.0-8.0.0-r5\mingw32\bin\gcc.exe -o __helpers.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=0 -D_NUITKA_EXE -IC:\Users\eugen\AppData\Local\Programs\Python\Python38-32\include -I. -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\include -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\static_src __helpers.c
+[2021-04-01T17:09:03.903412 11276] Hostname: DESKTOP-D4OIEET
+[2021-04-01T17:09:03.904410 13528] Source file: __constants.c
+[2021-04-01T17:09:03.904410 13528] Object file: __constants.o
+[2021-04-01T17:09:03.904410 11276] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:03.903412 14912] Config: (default) base_dir = 
+[2021-04-01T17:09:03.903412 14912] Config: (environment) cache_dir = C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-04-01T17:09:03.903412 14912] Config: (default) cache_dir_levels = 2
+[2021-04-01T17:09:03.903412 14912] Config: (default) compiler = 
+[2021-04-01T17:09:03.903412 14912] Config: (default) compiler_check = mtime
+[2021-04-01T17:09:03.903412 14912] Config: (default) compression = false
+[2021-04-01T17:09:03.903412 14912] Config: (default) compression_level = 6
+[2021-04-01T17:09:03.903412 14912] Config: (default) cpp_extension = 
+[2021-04-01T17:09:03.903412 14912] Config: (default) debug = false
+[2021-04-01T17:09:03.903412 14912] Config: (default) depend_mode = false
+[2021-04-01T17:09:03.903412 14912] Config: (default) direct_mode = true
+[2021-04-01T17:09:03.903412 14912] Config: (default) disable = false
+[2021-04-01T17:09:03.903412 14912] Config: (default) extra_files_to_hash = 
+[2021-04-01T17:09:03.903412 14912] Config: (default) hard_link = false
+[2021-04-01T17:09:03.903412 14912] Config: (default) hash_dir = true
+[2021-04-01T17:09:03.903412 14912] Config: (default) ignore_headers_in_manifest = 
+[2021-04-01T17:09:03.903412 14912] Config: (default) keep_comments_cpp = false
+[2021-04-01T17:09:03.903412 14912] Config: (default) limit_multiple = 0.8
+[2021-04-01T17:09:03.903412 14912] Config: (environment) log_file = E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build\ccache-2312.txt
+[2021-04-01T17:09:03.903412 14912] Config: (default) max_files = 0
+[2021-04-01T17:09:03.903412 14912] Config: (C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-04-01T17:09:03.903412 14912] Config: (default) path = 
+[2021-04-01T17:09:03.903412 14912] Config: (default) pch_external_checksum = false
+[2021-04-01T17:09:03.903412 14912] Config: (default) prefix_command = 
+[2021-04-01T17:09:03.903412 14912] Config: (default) prefix_command_cpp = 
+[2021-04-01T17:09:03.903412 14912] Config: (default) read_only = false
+[2021-04-01T17:09:03.903412 14912] Config: (default) read_only_direct = false
+[2021-04-01T17:09:03.903412 14912] Config: (default) recache = false
+[2021-04-01T17:09:03.903412 14912] Config: (default) run_second_cpp = true
+[2021-04-01T17:09:03.903412 14912] Config: (default) sloppiness = 
+[2021-04-01T17:09:03.903412 14912] Config: (default) stats = true
+[2021-04-01T17:09:03.903412 14912] Config: (default) temporary_dir = 
+[2021-04-01T17:09:03.903412 14912] Config: (default) umask = 
+[2021-04-01T17:09:03.904410 14912] Command line: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\eugen\AppData\Local\Nuitka\Nuitka\gcc\x86\10.2.0-11.0.0-8.0.0-r5\mingw32\bin\gcc.exe -o static_src\CompiledCellType.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=0 -D_NUITKA_EXE -IC:\Users\eugen\AppData\Local\Programs\Python\Python38-32\include -I. -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\include -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\stat[2021-04-01T17:09:03.903412 11804] Config: (default) base_dir = 
+[2021-04-01T17:09:03.903412 11804] Config: (environment) cache_dir = C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-04-01T17:09:03.903412 11804] Config: (default) cache_dir_levels = 2
+[2021-04-01T17:09:03.903412 11804] Config: (default) compiler = 
+[2021-04-01T17:09:03.903412 11804] Config: (default) compiler_check = mtime
+[2021-04-01T17:09:03.903412 11804] Config: (default) compression = false
+[2021-04-01T17:09:03.903412 11804] Config: (default) compression_level = 6
+[2021-04-01T17:09:03.903412 11804] Config: (default) cpp_extension = 
+[2021-04-01T17:09:03.903412 11804] Config: (default) debug = false
+[2021-04-01T17:09:03.903412 11804] Config: (default) depend_mode = false
+[2021-04-01T17:09:03.903412 11804] Config: (default) direct_mode = true
+[2021-04-01T17:09:03.903412 11804] Config: (default) disable = false
+[2021-04-01T17:09:03.903412 11804] Config: (default) extra_files_to_hash = 
+[2021-04-01T17:09:03.903412 11804] Config: (default) hard_link = false
+[2021-04-01T17:09:03.903412 11804] Config: (default) hash_dir = true
+[2021-04-01T17:09:03.903412 11804] Config: (default) ignore_headers_in_manifest = 
+[2021-04-01T17:09:03.903412 11804] Config: (default) keep_comments_cpp = false
+[2021-04-01T17:09:03.903412 11804] Config: (default) limit_multiple = 0.8
+[2021-04-01T17:09:03.903412 11804] Config: (environment) log_file = E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build\ccache-2312.txt
+[2021-04-01T17:09:03.903412 11804] Config: (default) max_files = 0
+[2021-04-01T17:09:03.903412 11804] Config: (C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-04-01T17:09:03.903412 11804] Config: (default) path = 
+[2021-04-01T17:09:03.903412 11804] Config: (default) pch_external_checksum = false
+[2021-04-01T17:09:03.903412 11804] Config: (default) prefix_command = 
+[2021-04-01T17:09:03.903412 11804] Config: (default) prefix_command_cpp = 
+[2021-04-01T17:09:03.903412 11804] Config: (default) read_only = false
+[2021-04-01T17:09:03.903412 11804] Config: (default) read_only_direct = false
+[2021-04-01T17:09:03.903412 11804] Config: (default) recache = false
+[2021-04-01T17:09:03.903412 11804] Config: (default) run_second_cpp = true
+[2021-04-01T17:09:03.903412 11804] Config: (default) sloppiness = 
+[2021-04-01T17:09:03.903412 11804] Config: (default) stats = true
+[2021-04-01T17:09:03.903412 11804] Config: (default) temporary_dir = 
+[2021-04-01T17:09:03.903412 11804] Config: (default) umask = 
+[2021-04-01T17:09:03.904410 11804] Command line: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\eugen\AppData\Local\Nuitka\Nuitka\gcc\x86\10.2.0-11.0.0-8.0.0-r5\mingw32\bin\gcc.exe -o static_src\MainProgram.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=0 -D_NUITKA_EXE -IC:\Users\eugen\AppData\Local\Programs\Python\Python38-32\include -I. -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\include -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\static_src static_src\MainProgram.c
+[2021-04-01T17:09:03.903412 13920] Config: (default) base_dir = 
+[2021-04-01T17:09:03.903412 13920] Config: (environment) cache_dir = C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-04-01T17:09:03.903412 13920] Config: (default) cache_dir_levels = 2
+[2021-04-01T17:09:03.903412 13920] Config: (default) compiler = 
+[2021-04-01T17:09:03.903412 13920] Config: (default) compiler_check = mtime
+[2021-04-01T17:09:03.903412 13920] Config: (default) compression = false
+[2021-04-01T17:09:03.903412 13920] Config: (default) compression_level = 6
+[2021-04-01T17:09:03.903412 13920] Config: (default) cpp_extension = 
+[2021-04-01T17:09:03.903412 13920] Config: (default) debug = false
+[2021-04-01T17:09:03.903412 13920] Config: (default) depend_mode = false
+[2021-04-01T17:09:03.903412 13920] Config: (default) direct_mode = true
+[2021-04-01T17:09:03.903412 13920] Config: (default) disable = false
+[2021-04-01T17:09:03.903412 13920] Config: (default) extra_files_to_hash = 
+[2021-04-01T17:09:03.903412 13920] Config: (default) hard_link = false
+[2021-04-01T17:09:03.903412 13920] Config: (default) hash_dir = true
+[2021-04-01T17:09:03.903412 13920] Config: (default) ignore_headers_in_manifest = 
+[2021-04-01T17:09:03.903412 13920] Config: (default) keep_comments_cpp = false
+[2021-04-01T17:09:03.903412 13920] Config: (default) limit_multiple = 0.8
+[2021-04-01T17:09:03.903412 13920] Config: (environment) log_file = E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build\ccache-2312.txt
+[2021-04-01T17:09:03.903412 13920] Config: (default) max_files = 0
+[2021-04-01T17:09:03.903412 13920] Config: (C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-04-01T17:09:03.903412 13920] Config: (default) path = 
+[2021-04-01T17:09:03.903412 13920] Config: (default) pch_external_checksum = false
+[2021-04-01T17:09:03.903412 13920] Config: (default) prefix_command = 
+[2021-04-01T17:09:03.903412 13920] Config: (default) prefix_command_cpp = 
+[2021-04-01T17:09:03.903412 13920] Config: (default) read_only = false
+[2021-04-01T17:09:03.903412 13920] Config: (default) read_only_direct = false
+[2021-04-01T17:09:03.903412 13920] Config: (default) recache = false
+[2021-04-01T17:09:03.903412 13920] Config: (default) run_second_cpp = true
+[2021-04-01T17:09:03.903412 13920] Config: (default) sloppiness = 
+[2021-04-01T17:09:03.903412 13920] Config: (default) stats = true
+[2021-04-01T17:09:03.903412 13920] Config: (default) temporary_dir = 
+[2021-04-01T17:09:03.903412 13920] Config: (default) umask = 
+[2021-04-01T17:09:03.904410 13920] Command line: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\eugen\AppData\Local\Nuitka\Nuitka\gcc\x86\10.2.0-11.0.0-8.0.0-r5\mingw32\bin\gcc.exe -o module.__main__.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=0 -D_NUITKA_EXE -IC:\Users\eugen\AppData\Local\Programs\Python\Python38-32\include -I. -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\include -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\static_src module.__main__.c
+tic_src\CompiledFunctionType.c
+[2021-04-01T17:09:03.904410 17352] Hostname: DESKTOP-D4OIEET
+[2021-04-01T17:09:03.904410 13920] Hostname: DESKTOP-D4OIEET
+[2021-04-01T17:09:03.903412 12648] Config: (default) base_dir = 
+[2021-04-01T17:09:03.903412 12648] Config: (environment) cache_dir = C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-04-01T17:09:03.903412 12648] Config: (default) cache_dir_levels = 2
+[2021-04-01T17:09:03.903412 12648] Config: (default) compiler = 
+[2021-04-01T17:09:03.903412 12648] Config: (default) compiler_check = mtime
+[2021-04-01T17:09:03.903412 12648] Config: (default) compression = false
+[2021-04-01T17:09:03.903412 12648] Config: (default) compression_level = 6
+[2021-04-01T17:09:03.903412 12648] Config: (default) cpp_extension = 
+[2021-04-01T17:09:03.903412 12648] Config: (default) debug = false
+[2021-04-01T17:09:03.903412 12648] Config: (default) depend_mode = false
+[2021-04-01T17:09:03.903412 12648] Config: (default) direct_mode = true
+[2021-04-01T17:09:03.903412 12648] Config: (default) disable = false
+[2021-04-01T17:09:03.903412 12648] Config: (default) extra_files_to_hash = 
+[2021-04-01T17:09:03.903412 12648] Config: (default) hard_link = false
+[2021-04-01T17:09:03.903412 12648] Config: (default) hash_dir = true
+[2021-04-01T17:09:03.903412 12648] Config: (default) ignore_headers_in_manifest = 
+[2021-04-01T17:09:03.903412 12648] Config: (default) keep_comments_cpp = false
+[2021-04-01T17:09:03.903412 12648] Config: (default) limit_multiple = 0.8
+[2021-04-01T17:09:03.903412 12648] Config: (environment) log_file = E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build\ccache-2312.txt
+[2021-04-01T17:09:03.903412 12648] Config: (default) max_files = 0
+[2021-04-01T17:09:03.903412 12648] Config: (C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-04-01T17:09:03.903412 12648] Config: (default) path = 
+[2021-04-01T17:09:03.903412 12648] Config: (default) pch_external_checksum = false
+[2021-04-01T17:09:03.903412 12648] Config: (default) prefix_command = 
+[2021-04-01T17:09:03.903412 12648] Config: (default) prefix_command_cpp = 
+[2021-04-01T17:09:03.903412 12648] Config: (default) read_only = false
+[2021-04-01T17:09:03.903412 12648] Config: (default) read_only_direct = false
+[2021-04-01T17:09:03.903412 12648] Config: (default) recache = false
+[2021-04-01T17:09:03.903412 12648] Config: (default) run_second_cpp = true
+[2021-04-01T17:09:03.903412 12648] Config: (default) sloppiness = 
+[2021-04-01T17:09:03.903412 12648] Config: (default) stats = true
+[2021-04-01T17:09:03.903412 12648] Config: (default) temporary_dir = 
+[2021-04-01T17:09:03.903412 12648] Config: (default) umask = 
+[2021-04-01T17:09:03.904410 12648] Command line: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\eugen\AppData\Local\Nuitka\Nuitka\gcc\x86\10.2.0-11.0.0-8.0.0-r5\mingw32\bin\gcc.exe -o static_src\CompiledGeneratorType.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=0 -D_NUITKA_EXE -IC:\Users\eugen\AppData\Local\Programs\Python\Python38-32\include -I. -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\include -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\static_src static_src\CompiledGeneratorType.c
+[2021-04-01T17:09:03.904410 12648] Hostname: DESKTOP-D4OIEET
+[2021-04-01T17:09:03.904410 8376 ] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:03.905408 13528] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/6/2/288ce97359da258b12663353982e46-4747.manifest
+[2021-04-01T17:09:03.905408 14912] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:03.905408 11804] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:03.905408 13920] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:03.905408 12648] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:03.905408 17352] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:03.905408 11276] Source file: __helpers.c
+[2021-04-01T17:09:03.905408 11276] Object file: __helpers.o
+[2021-04-01T17:09:03.905408 11276] Trying direct lookup
+[2021-04-01T17:09:03.906404 8376 ] Source file: __loader.c
+[2021-04-01T17:09:03.906404 8376 ] Object file: __loader.o
+[2021-04-01T17:09:03.906404 8376 ] Trying direct lookup
+[2021-04-01T17:09:03.906404 13920] Source file: module.__main__.c
+[2021-04-01T17:09:03.906404 13920] Object file: module.__main__.o
+[2021-04-01T17:09:03.906404 11804] Source file: static_src\MainProgram.c
+[2021-04-01T17:09:03.906404 11804] Object file: static_src\MainProgram.o
+[2021-04-01T17:09:03.906404 13920] Trying direct lookup
+[2021-04-01T17:09:03.906404 11804] Trying direct lookup
+c\CompiledCellType.c
+[2021-04-01T17:09:03.906404 14912] Object file: static_src\CompiledCellType.o
+[2021-04-01T17:09:03.906404 11276] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/3/c5a3e7dccb3a9773e053a86fe9be42-43014.manifest
+[2021-04-01T17:09:03.906404 14912] Trying direct lookup
+[2021-04-01T17:09:03.907542 12648] Source file: static_src\CompiledGeneratorType.c
+[2021-04-01T17:09:03.907542 12648] Object file: static_src\CompiledGeneratorType.o
+[2021-04-01T17:09:03.908507 12648] Trying direct lookup
+[2021-04-01T17:09:03.909489 17352] Source file: static_src\CompiledFunctionType.c
+[2021-04-01T17:09:03.909489 17352] Object file: static_src\CompiledFunctionType.o
+[2021-04-01T17:09:03.909489 17352] Trying direct lookup
+[2021-04-01T17:09:03.909489 13920] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/4/ce53bc3b7fd2d400d458b2e1cccd6d-53745.manifest
+[2021-04-01T17:09:03.909489 8376 ] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/b/2b6793143c1cd9d4a693debb97cd38-3141.manifest
+[2021-04-01T17:09:03.909489 14912] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/2/bee02c7440ed2141da53d1c766464d-8019.manifest
+[2021-04-01T17:09:03.909489 11804] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/c/103e87f8a842536d1e2008a1a1c25b-26269.manifest
+[2021-04-01T17:09:03.910394 17352] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/b/03a7adbec606a0c3e83e6b25ab2ee9-79000.manifest
+[2021-04-01T17:09:03.910394 12648] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/e/b519d55d6e74f92c33d0e77210a453-57449.manifest
+[2021-04-01T17:09:03.998159 8376 ] Got object file hash from manifest
+[2021-04-01T17:09:03.999157 8376 ] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/d/6f8a46aee1bd4b5c4c1fe9365b4939-434476.o to __loader.o (uncompressed)
+[2021-04-01T17:09:03.999157 8376 ] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/d/6f8a46aee1bd4b5c4c1fe9365b4939-434476.o -> __loader.o
+[2021-04-01T17:09:03.999157 8376 ] Succeeded getting cached result
+[2021-04-01T17:09:03.999157 8376 ] Result: cache hit (direct)
+[2021-04-01T17:09:03.999157 8376 ] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/stats.lock
+[2021-04-01T17:09:04.000154 8376 ] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/stats.lock
+[2021-04-01T17:09:04.029076 13920] Got object file hash from manifest
+[2021-04-01T17:09:04.030074 13920] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/2/9f7433612d23ab59b7ede232571f19-666917.o to module.__main__.o (uncompressed)
+[2021-04-01T17:09:04.030074 13920] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/2/9f7433612d23ab59b7ede232571f19-666917.o -> module.__main__.o
+[2021-04-01T17:09:04.030074 17352] Got object file hash from manifest
+[2021-04-01T17:09:04.030074 13920] Succeeded getting cached result
+[2021-04-01T17:09:04.031071 13920] Result: cache hit (direct)
+[2021-04-01T17:09:04.031071 13920] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/stats.lock
+[2021-04-01T17:09:04.032068 14912] Got object file hash from manifest
+[2021-04-01T17:09:04.032068 11276] Got object file hash from manifest
+[2021-04-01T17:09:04.033066 14912] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/7/aeafeed98a21443e9975b22a0bb019-628295.o to static_src\CompiledCellType.o (uncompressed)
+[2021-04-01T17:09:04.033066 11276] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/9/988fa4d6fa42396dc11c1e6ef62c81-648411.o to __helpers.o (uncompressed)
+[2021-04-01T17:09:04.033066 14912] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/7/aeafeed98a21443e9975b22a0bb019-628295.o -> static_src\CompiledCellType.o
+[2021-04-01T17:09:04.033066 17352] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/a/bd30ca8dd1d8a2e4bff054273e97fe-710547.o to static_src\CompiledFunctionType.o (uncompressed)
+[2021-04-01T17:09:04.033066 14912] Succeeded getting cached result
+[2021-04-01T17:09:04.033066 14912] Result: cache hit (direct)
+[2021-04-01T17:09:04.033066 11276] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/9/988fa4d6fa42396dc11c1e6ef62c81-648411.o -> __helpers.o
+[2021-04-01T17:09:04.033066 17352] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/a/bd30ca8dd1d8a2e4bff054273e97fe-710547.o -> static_src\CompiledFunctionType.o
+[2021-04-01T17:09:04.034063 14912] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/stats.lock
+[2021-04-01T17:09:04.034063 11276] Succeeded getting cached result
+[2021-04-01T17:09:04.034063 11276] Result: cache hit (direct)
+[2021-04-01T17:09:04.034063 17352] Succeeded getting cached result
+[2021-04-01T17:09:04.034063 17352] Result: cache hit (direct)
+[2021-04-01T17:09:04.034063 11276] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/stats.lock
+[2021-04-01T17:09:04.034063 17352] lockfile_acquire: CreateFile C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/stats.lock: error code 32
+[2021-04-01T17:09:04.034063 17352] lockfile_acquire: failed to acquire C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/stats.lock; sleeping 1000 microseconds
+[2021-04-01T17:09:04.034063 14912] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/stats.lock
+[2021-04-01T17:09:04.035060 11276] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/stats.lock
+[2021-04-01T17:09:04.035060 13920] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/stats.lock
+[2021-04-01T17:09:04.035060 12648] Got object file hash from manifest
+[2021-04-01T17:09:04.036058 13528] Got object file hash from manifest
+[2021-04-01T17:09:04.036058 12648] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/1/843b1afde90cd414d98b2c00f1a7ac-816476.o to static_src\CompiledGeneratorType.o (uncompressed)
+[2021-04-01T17:09:04.037055 12648] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/1/843b1afde90cd414d98b2c00f1a7ac-816476.o -> static_src\CompiledGeneratorType.o
+[2021-04-01T17:09:04.037055 12648] Succeeded getting cached result
+[2021-04-01T17:09:04.037055 12648] Result: cache hit (direct)
+[2021-04-01T17:09:04.037055 13528] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/0/dcc95deb0cbecdde3b9678b0c889f6-624582.o to __constants.o (uncompressed)
+[2021-04-01T17:09:04.037055 12648] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/stats.lock
+[2021-04-01T17:09:04.037055 13528] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/0/dcc95deb0cbecdde3b9678b0c889f6-624582.o -> __constants.o
+[2021-04-01T17:09:04.038052 13528] Succeeded getting cached result
+[2021-04-01T17:09:04.038052 13528] Result: cache hit (direct)
+[2021-04-01T17:09:04.038052 13528] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/stats.lock
+[2021-04-01T17:09:04.038052 12648] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/stats.lock
+[2021-04-01T17:09:04.039050 13528] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/stats.lock
+[2021-04-01T17:09:04.047028 17352] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/stats.lock
+[2021-04-01T17:09:04.048026 17352] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/stats.lock
+[2021-04-01T17:09:04.060992 11804] Got object file hash from manifest
+[2021-04-01T17:09:04.061988 11804] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/8/219caaea413419a9e3fc00fc987291-2632988.o to static_src\MainProgram.o (uncompressed)
+[2021-04-01T17:09:04.061988 11804] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/8/219caaea413419a9e3fc00fc987291-2632988.o -> static_src\MainProgram.o
+[2021-04-01T17:09:04.061988 11804] Succeeded getting cached result
+[2021-04-01T17:09:04.061988 11804] Result: cache hit (direct)
+[2021-04-01T17:09:04.061988 11804] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/stats.lock
+[2021-04-01T17:09:04.062986 11804] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/stats.lock
+[2021-04-01T17:09:04.148759 13416] === CCACHE 3.7.12 STARTED =========================================
+[2021-04-01T17:09:04.148759 13416] Config: (default) base_dir = 
+[2021-04-01T17:09:04.148759 13416] Config: (environment) cache_dir = C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-04-01T17:09:04.148759 13416] Config: (default) cache_dir_levels = 2
+[2021-04-01T17:09:04.148759 13416] Config: (default) compiler = 
+[2021-04-01T17:09:04.148759 13416] Config: (default) compiler_check = mtime
+[2021-04-01T17:09:04.148759 13416] Config: (default) compression = false
+[2021-04-01T17:09:04.148759 13416] Config: (default) compression_level = 6
+[2021-04-01T17:09:04.148759 13416] Config: (default) cpp_extension = 
+[2021-04-01T17:09:04.148759 13416] Config: (default) debug = false
+[2021-04-01T17:09:04.148759 13416] Config: (default) depend_mode = false
+[2021-04-01T17:09:04.148759 13416] Config: (default) direct_mode = true
+[2021-04-01T17:09:04.148759 13416] Config: (default) disable = false
+[2021-04-01T17:09:04.148759 13416] Config: (default) extra_files_to_hash = 
+[2021-04-01T17:09:04.148759 13416] Config: (default) hard_link = false
+[2021-04-01T17:09:04.148759 13416] Config: (default) hash_dir = true
+[2021-04-01T17:09:04.148759 13416] Config: (default) ignore_headers_in_manifest = 
+[2021-04-01T17:09:04.148759 13416] Config: (default) keep_comments_cpp = false
+[2021-04-01T17:09:04.148759 13416] Config: (default) limit_multiple = 0.8
+[2021-04-01T17:09:04.148759 13416] Config: (environment) log_file = E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build\ccache-2312.txt
+[2021-04-01T17:09:04.148759 13416] Config: (default) max_files = 0
+[2021-04-01T17:09:04.148759 13416] Config: (C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-04-01T17:09:04.148759 13416] Config: (default) path = 
+[2021-04-01T17:09:04.148759 13416] Config: (default) pch_external_checksum = false
+[2021-04-01T17:09:04.148759 13416] Config: (default) prefix_command = 
+[2021-04-01T17:09:04.148759 13416] Config: (default) prefix_command_cpp = 
+[2021-04-01T17:09:04.148759 13416] Config: (default) read_only = false
+[2021-04-01T17:09:04.148759 13416] Config: (default) read_only_direct = false
+[2021-04-01T17:09:04.148759 13416] Config: (default) recache = false
+[2021-04-01T17:09:04.148759 13416] Config: (default) run_second_cpp = true
+[2021-04-01T17:09:04.148759 13416] Config: (default) sloppiness = 
+[2021-04-01T17:09:04.148759 13416] Config: (default) stats = true
+[2021-04-01T17:09:04.148759 13416] Config: (default) temporary_dir = 
+[2021-04-01T17:09:04.148759 13416] Config: (default) umask = 
+[2021-04-01T17:09:04.148759 13416] Command line: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\eugen\AppData\Local\Nuitka\Nuitka\gcc\x86\10.2.0-11.0.0-8.0.0-r5\mingw32\bin\gcc.exe -o static_src\CompiledCodeHelpers.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=0 -D_NUITKA_EXE -IC:\Users\eugen\AppData\Local\Programs\Python\Python38-32\include -I. -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\include -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\static_src static_src\CompiledCodeHelpers.c
+[2021-04-01T17:09:04.148759 13416] Hostname: DESKTOP-D4OIEET
+[2021-04-01T17:09:04.148759 13416] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:04.149759 13416] Source file: static_src\CompiledCodeHelpers.c
+[2021-04-01T17:09:04.149759 13416] Object file: static_src\CompiledCodeHelpers.o
+[2021-04-01T17:09:04.149759 13416] Trying direct lookup
+[2021-04-01T17:09:04.149759 13416] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/5/5414b1b997cd2fa9566f91da0bd1ec-55524.manifest
+[2021-04-01T17:09:04.165711 11496] === CCACHE 3.7.12 STARTED =========================================
+[2021-04-01T17:09:04.165711 11496] Config: (default) base_dir = 
+[2021-04-01T17:09:04.165711 11496] Config: (environment) cache_dir = C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-04-01T17:09:04.165711 11496] Config: (default) cache_dir_levels = 2
+[2021-04-01T17:09:04.165711 11496] Config: (default) compiler = 
+[2021-04-01T17:09:04.165711 11496] Config: (default) compiler_check = mtime
+[2021-04-01T17:09:04.165711 11496] Config: (default) compression = false
+[2021-04-01T17:09:04.165711 11496] Config: (default) compression_level = 6
+[2021-04-01T17:09:04.165711 11496] Config: (default) cpp_extension = 
+[2021-04-01T17:09:04.165711 11496] Config: (default) debug = false
+[2021-04-01T17:09:04.165711 11496] Config: (default) depend_mode = false
+[2021-04-01T17:09:04.165711 11496] Config: (default) direct_mode = true
+[2021-04-01T17:09:04.165711 11496] Config: (default) disable = false
+[2021-04-01T17:09:04.165711 11496] Config: (default) extra_files_to_hash = 
+[2021-04-01T17:09:04.165711 11496] Config: (default) hard_link = false
+[2021-04-01T17:09:04.165711 11496] Config: (default) hash_dir = true
+[2021-04-01T17:09:04.165711 11496] Config: (default) ignore_headers_in_manifest = 
+[2021-04-01T17:09:04.165711 11496] Config: (default) keep_comments_cpp = false
+[2021-04-01T17:09:04.165711 11496] Config: (default) limit_multiple = 0.8
+[2021-04-01T17:09:04.165711 11496] Config: (environment) log_file = E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build\ccache-2312.txt
+[2021-04-01T17:09:04.165711 11496] Config: (default) max_files = 0
+[2021-04-01T17:09:04.165711 11496] Config: (C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-04-01T17:09:04.165711 11496] Config: (default) path = 
+[2021-04-01T17:09:04.165711 11496] Config: (default) pch_external_checksum = false
+[2021-04-01T17:09:04.165711 11496] Config: (default) prefix_command = 
+[2021-04-01T17:09:04.165711 11496] Config: (default) prefix_command_cpp = 
+[2021-04-01T17:09:04.165711 11496] Config: (default) read_only = false
+[2021-04-01T17:09:04.165711 11496] Config: (default) read_only_direct = false
+[2021-04-01T17:09:04.165711 11496] Config: (default) recache = false
+[2021-04-01T17:09:04.165711 11496] Config: (default) run_second_cpp = true
+[2021-04-01T17:09:04.165711 11496] Config: (default) sloppiness = 
+[2021-04-01T17:09:04.165711 11496] Config: (default) stats = true
+[2021-04-01T17:09:04.165711 11496] Config: (default) temporary_dir = 
+[2021-04-01T17:09:04.165711 11496] Config: (default) umask = 
+[2021-04-01T17:09:04.165711 11496] Command line: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\eugen\AppData\Local\Nuitka\Nuitka\gcc\x86\10.2.0-11.0.0-8.0.0-r5\mingw32\bin\gcc.exe -o static_src\InspectPatcher.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=0 -D_NUITKA_EXE -IC:\Users\eugen\AppData\Local\Programs\Python\Python38-32\include -I. -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\include -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\static_src static_src\InspectPatcher.c
+[2021-04-01T17:09:04.165711 11496] Hostname: DESKTOP-D4OIEET
+[2021-04-01T17:09:04.165711 11496] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:04.166708 11496] Source file: static_src\InspectPatcher.c
+[2021-04-01T17:09:04.166708 11496] Object file: static_src\InspectPatcher.o
+[2021-04-01T17:09:04.166708 11496] Trying direct lookup
+[2021-04-01T17:09:04.166708 11496] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/7/34ae7ff1a913edaf9b2cdffad07863-13683.manifest
+[2021-04-01T17:09:04.179673 13724] === CCACHE 3.7.12 STARTED =========================================
+[2021-04-01T17:09:04.179673 13724] Config: (default) base_dir = 
+[2021-04-01T17:09:04.179673 13724] Config: (environment) cache_dir = C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2021-04-01T17:09:04.179673 13724] Config: (default) cache_dir_levels = 2
+[2021-04-01T17:09:04.179673 13724] Config: (default) compiler = 
+[2021-04-01T17:09:04.179673 13724] Config: (default) compiler_check = mtime
+[2021-04-01T17:09:04.179673 13724] Config: (default) compression = false
+[2021-04-01T17:09:04.179673 13724] Config: (default) compression_level = 6
+[2021-04-01T17:09:04.179673 13724] Config: (default) cpp_extension = 
+[2021-04-01T17:09:04.179673 13724] Config: (default) debug = false
+[2021-04-01T17:09:04.179673 13724] Config: (default) depend_mode = false
+[2021-04-01T17:09:04.179673 13724] Config: (default) direct_mode = true
+[2021-04-01T17:09:04.179673 13724] Config: (default) disable = false
+[2021-04-01T17:09:04.179673 13724] Config: (default) extra_files_to_hash = 
+[2021-04-01T17:09:04.179673 13724] Config: (default) hard_link = false
+[2021-04-01T17:09:04.179673 13724] Config: (default) hash_dir = true
+[2021-04-01T17:09:04.179673 13724] Config: (default) ignore_headers_in_manifest = 
+[2021-04-01T17:09:04.179673 13724] Config: (default) keep_comments_cpp = false
+[2021-04-01T17:09:04.179673 13724] Config: (default) limit_multiple = 0.8
+[2021-04-01T17:09:04.179673 13724] Config: (environment) log_file = E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build\ccache-2312.txt
+[2021-04-01T17:09:04.179673 13724] Config: (default) max_files = 0
+[2021-04-01T17:09:04.179673 13724] Config: (C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/ccache.conf) max_size = 5.0G
+[2021-04-01T17:09:04.179673 13724] Config: (default) path = 
+[2021-04-01T17:09:04.179673 13724] Config: (default) pch_external_checksum = false
+[2021-04-01T17:09:04.179673 13724] Config: (default) prefix_command = 
+[2021-04-01T17:09:04.179673 13724] Config: (default) prefix_command_cpp = 
+[2021-04-01T17:09:04.179673 13724] Config: (default) read_only = false
+[2021-04-01T17:09:04.179673 13724] Config: (default) read_only_direct = false
+[2021-04-01T17:09:04.179673 13724] Config: (default) recache = false
+[2021-04-01T17:09:04.179673 13724] Config: (default) run_second_cpp = true
+[2021-04-01T17:09:04.179673 13724] Config: (default) sloppiness = 
+[2021-04-01T17:09:04.179673 13724] Config: (default) stats = true
+[2021-04-01T17:09:04.179673 13724] Config: (default) temporary_dir = 
+[2021-04-01T17:09:04.179673 13724] Config: (default) umask = 
+[2021-04-01T17:09:04.179673 13724] Command line: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\ccache\v3.7.12\ccache.exe C:\Users\eugen\AppData\Local\Nuitka\Nuitka\gcc\x86\10.2.0-11.0.0-8.0.0-r5\mingw32\bin\gcc.exe -o static_src\MetaPathBasedLoader.o -c -std=c11 -fvisibility=hidden -fwrapv -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -fcompare-debug-second -O3 -pipe -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=0 -D_NUITKA_EXE -IC:\Users\eugen\AppData\Local\Programs\Python\Python38-32\include -I. -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\include -IC:\Users\eugen\AppData\Local\Programs\Python\PYTHON~1\lib\SITE-P~1\nuitka\build\static_src static_src\MetaPathBasedLoader.c
+[2021-04-01T17:09:04.179673 13724] Hostname: DESKTOP-D4OIEET
+[2021-04-01T17:09:04.179673 13724] Working directory: E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.build
+[2021-04-01T17:09:04.180671 13724] Source file: static_src\MetaPathBasedLoader.c
+[2021-04-01T17:09:04.180671 13724] Object file: static_src\MetaPathBasedLoader.o
+[2021-04-01T17:09:04.180671 13724] Trying direct lookup
+[2021-04-01T17:09:04.180671 13724] Looking for object file hash in C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/a/4/0c498af5c5b191d783b0dcddb9e31f-52255.manifest
+[2021-04-01T17:09:04.203610 11496] Got object file hash from manifest
+[2021-04-01T17:09:04.204606 11496] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/4/ef44e15eaa8638b6c0df2031d1c9d7-633812.o to static_src\InspectPatcher.o (uncompressed)
+[2021-04-01T17:09:04.204606 11496] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/4/ef44e15eaa8638b6c0df2031d1c9d7-633812.o -> static_src\InspectPatcher.o
+[2021-04-01T17:09:04.204606 11496] Succeeded getting cached result
+[2021-04-01T17:09:04.204606 11496] Result: cache hit (direct)
+[2021-04-01T17:09:04.204606 11496] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/stats.lock
+[2021-04-01T17:09:04.205604 11496] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/stats.lock
+[2021-04-01T17:09:04.233530 13724] Got object file hash from manifest
+[2021-04-01T17:09:04.233530 13724] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/a/863706aec3c9fa4150c5671591fca1-1353321.o to static_src\MetaPathBasedLoader.o (uncompressed)
+[2021-04-01T17:09:04.233530 13724] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/a/863706aec3c9fa4150c5671591fca1-1353321.o -> static_src\MetaPathBasedLoader.o
+[2021-04-01T17:09:04.234527 13724] Succeeded getting cached result
+[2021-04-01T17:09:04.234527 13724] Result: cache hit (direct)
+[2021-04-01T17:09:04.234527 13724] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/stats.lock
+[2021-04-01T17:09:04.234527 13416] Got object file hash from manifest
+[2021-04-01T17:09:04.234527 13416] Copying C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/b/dbe172b77061a04f66a852fc32573d-4387799.o to static_src\CompiledCodeHelpers.o (uncompressed)
+[2021-04-01T17:09:04.234527 13724] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/stats.lock
+[2021-04-01T17:09:04.235524 13416] Created from cache: C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/b/dbe172b77061a04f66a852fc32573d-4387799.o -> static_src\CompiledCodeHelpers.o
+[2021-04-01T17:09:04.235524 13416] Succeeded getting cached result
+[2021-04-01T17:09:04.235524 13416] Result: cache hit (direct)
+[2021-04-01T17:09:04.235524 13416] Acquired lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/stats.lock
+[2021-04-01T17:09:04.236521 13416] Releasing lock C:\Users\eugen\AppData\Local\Nuitka\Nuitka\Cache\ccache/2/stats.lock
