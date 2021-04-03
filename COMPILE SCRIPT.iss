@@ -47,8 +47,8 @@ Source: "E:\Git\formulaufsm_dataSoftware\LICENSE"; DestDir: "{app}"; Flags: igno
 Source: "E:\Git\formulaufsm_dataSoftware\python-3.9.2-amd64.exe"; DestDir: "{app}"; Flags: deleteafterinstall ignoreversion recursesubdirs createallsubdirs
 Source: "E:\Git\formulaufsm_dataSoftware\README.MD"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "E:\Git\formulaufsm_dataSoftware\INSTALL_GUIDE.MD"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "E:\Git\formulaufsm_dataSoftware\setupbat2.bat"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.py.bat"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\setupbat.bat"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\launcher.bat"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "E:\Git\formulaufsm_dataSoftware\FUFSMElectronics_SETUP.exe"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.exe"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

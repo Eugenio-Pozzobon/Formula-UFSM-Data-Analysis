@@ -1,20 +1,16 @@
-Bem vindo ao analisador de Dados CSV da Network Control Unit
----------------------------------------------------------------
-Rode o arquivo FUFSMpro_v0.1.exe
+GUIA DE INSTALACAO
+----------------------
 
-Para abrir um arquivo de log, precione sim na primeira tela de pergunta
-Selecione o log que deseja abrir
-Aguarde a geração do HTML no seu navegador, preferencialmente já esteja com o navegador aberto
-Em caso de bugs, erros, contate o desenvolvedor 
+Antes desse instalador encerrar, abrir-se-a uma janela do prompt de comando automaticamente
 
-Canais
---------------------------------------
-time,
-CAN_ID,CAN_byte[0],CAN_byte[1],CAN_byte[2],CAN_byte[3],CAN_byte[4],CAN_byte[5],CAN_byte[6],CAN_byte[7],
-A_1,LVDTFL,LVDTRR,A_4,A_5,A_6,LVDTRL,LVDTFR,A_9,
-A_1_map,LVDTFLmap,LVDTRRmap,A_4_map,A_5_map,A_6_map,LVDTRLmap,LVDTFRmap,A_9_map,
-O_1,O_2,O_3,GForceLat,GForceLong,GForceVert,gyro_X,gyro_Y,gyro_z,
-ncuTemp,atmelTemp,sd_bps,fileSize,
-max_enable,TKRR,,TKRL,TKFR,TKFL,RPM,
-Gear,BatteryVoltage,OilPressure,Speed,TPS,SteeringAngle,ECU_GForceLat,Lambda,MAP,FuelPressure,BrakePressure,EngineTemp,OilTemp,AirTemp,RadOutTemp,
-GPSlatHW,GPSlatLW,GPSlongHW,GPSlongLW,PneuTraseiroInner,PneuTraseiroCenter,PneuTraseiroOuter,PneuTraseiroInner,PneuTraseiroCenter,PneuTraseiroOuter,,
+NÃO FECHE O PROMPT
+
+Aceite a instalação do python 3.9.2
+
+ATENCAO: CASO VOCE JA TENHA PYTHON INSTALADO VOCE PODE NEGAR A INSTALACAO DA VERSAO 3.9.2, POREM CONFIRA SE NÃO HAVERAO PROBLEMAS NA INSTALACAO. VOCE PODERA TER PROBLEMAS
+
+
+Ao final, execute o executavel da area de trabalho ou va em C:/Arquivos de Programas(x86)/Formula...
+Procure pelo FormulaUFSM_Electronics.exe e rode-o
+
+Em caso de duvidas, entre em contato com o desenvolvedor pelo email: eugenio.formula@gmail.com

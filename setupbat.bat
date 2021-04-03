@@ -26,7 +26,7 @@
 ::ZQ0/vhVqMQ3MEVWAtB9wSA==
 ::Zg8zqx1/OA3MEVWAtB9wSA==
 ::dhA7pRFwIByZRRnk
-::Zh4grVQjdCqDJH6N4H42JwlZWQiDKW2pC4oY6fz63OWBtlocRucDa4rPz6SMIfRd713hFQ==
+::Zh4grVQjdCqDJH6N4H42JwlZWQiDKW2pC4oY6fz63OWBtlocRucDXrr96ZmrLOUQ/lfre58uxUVpvf85PFVdZhfL
 ::YB416Ek+ZW8=
 ::
 ::
@@ -45,7 +45,6 @@ py -m pip install -U pip
 
 py -m pip install numpy
 py -m pip install pandas
-py -m pip install nuitka 
 py -m pip install bokeh
 py -m pip install tkintertable
 py -m pip install sockets
@@ -53,6 +52,5 @@ py -m pip install pathlib
 py -m pip install update-check
 py -m pip install pyserial
 py -m pip install scipy
-py -m nuitka --windows-uac-admin --windows-icon-from-ico="./projectfolder/icon.ico" --remove-output --assume-yes-for-downloads --mingw64 FormulaUFSM_Electronics.py
 
 exit
