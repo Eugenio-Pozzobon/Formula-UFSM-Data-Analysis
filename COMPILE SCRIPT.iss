@@ -57,14 +57,6 @@ Filename: "{app}\setupbat.bat"
 [Icons]
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
-[Code]
-procedure CurStepChanged(CurStep: TSetupStep);
-begin
-  if CurStep = ssPostInstall then begin
-          DelTree(ExpandConstant('{userappdata}\Local\Nuitka'), True, True, True);
-    end;
-end; 
-
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\_wcu_cacheFiles_"  
 Type: filesandordirs; Name: "{app}\__pycache__"    
