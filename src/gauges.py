@@ -30,8 +30,8 @@ def plot_angle_image():
 
     plt.toolbar.logo = None
     plt.toolbar_location = None
-    plt.xaxis.visible = None
-    plt.yaxis.visible = None
+    plt.xaxis.visible = False
+    plt.yaxis.visible = False
     plt.xgrid.grid_line_color = None
     plt.ygrid.grid_line_color = None
 
@@ -57,8 +57,8 @@ def plot_text_data(data, unit, name, color):
 
     plt.toolbar.logo = None
     plt.toolbar_location = None
-    plt.xaxis.visible = None
-    plt.yaxis.visible = None
+    plt.xaxis.visible = False
+    plt.yaxis.visible = False
     plt.xgrid.grid_line_color = None
     plt.ygrid.grid_line_color = None
 

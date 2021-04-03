@@ -2,10 +2,10 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Formula UFSM Electronics"
-#define MyAppVersion "3.2"
+#define MyAppVersion "3.3"
 #define MyAppPublisher "Formula UFSM"
 #define MyAppURL "https://github.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis"
-#define MyAppExeName "Formula UFSM Electronics.exe"
+#define MyAppExeName "FormulaUFSM_Electronics.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -25,10 +25,10 @@ InfoBeforeFile=E:\Git\formulaufsm_dataSoftware\README.MD
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 SetupIconFile=E:\Git\formulaufsm_dataSoftware\projectfolder\icon.ico
-Password=formulaufsm
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
+UninstallDisplayIcon={app}\projectfolder\icon.ico
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -38,14 +38,34 @@ Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortugue
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "E:\Git\formulaufsm_dataSoftware\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\Git\formulaufsm_dataSoftware\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\projectfolder\*"; DestDir: "{app}\projectfolder\"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\src\*"; DestDir: "{app}\src\"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\static\*"; DestDir: "{app}\static\"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.py"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\get-pip.py"; DestDir: "{app}"; Flags: deleteafterinstall ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\LICENSE"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\python-3.9.2-amd64.exe"; DestDir: "{app}"; Flags: deleteafterinstall ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\README.MD"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\setupbat2.bat"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.py.bat"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.exe"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
+[Run]
+Filename: "{app}\setupbat.bat"
+
 [Icons]
-Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
-[Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+[Code]
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if CurStep = ssPostInstall then begin
+          DelTree(ExpandConstant('{userappdata}\Local\Nuitka'), True, True, True);
+    end;
+end; 
 
+[UninstallDelete]
+Type: filesandordirs; Name: "{app}\_wcu_cacheFiles_"  
+Type: filesandordirs; Name: "{app}\__pycache__"    
+Type: filesandordirs; Name: "{app}\python39.dll"

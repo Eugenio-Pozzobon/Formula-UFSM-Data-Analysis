@@ -16,7 +16,6 @@ from bokeh.sampledata.sample_geojson import geojson
 from scipy.signal import sosfiltfilt
 import numpy as np
 import pandas as pd
-import dask.dataframe as dd
 
 import src.programTools as ncuTools
 
@@ -79,8 +78,8 @@ def gps(data, singleplot = False, H=550, W=1000):
     g1 = p.circle(x=lat, y=long, size=3, color = 'gray')
 
     p.toolbar.logo = None
-    p.xaxis.visible = None
-    p.yaxis.visible = None
+    p.xaxis.visible = False
+    p.yaxis.visible = False
 
     if singleplot:
         g2 = p.circle(x=lat.iloc[-1:], y=long.iloc[-1:], size=5, color='red')
