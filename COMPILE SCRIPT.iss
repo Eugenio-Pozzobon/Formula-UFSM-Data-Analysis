@@ -21,7 +21,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
 LicenseFile=E:\Git\formulaufsm_dataSoftware\LICENSE
-InfoBeforeFile=E:\Git\formulaufsm_dataSoftware\README.MD
+InfoBeforeFile=E:\Git\formulaufsm_dataSoftware\INSTALL_GUIDE.MD
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 SetupIconFile=E:\Git\formulaufsm_dataSoftware\projectfolder\icon.ico
@@ -46,8 +46,10 @@ Source: "E:\Git\formulaufsm_dataSoftware\get-pip.py"; DestDir: "{app}"; Flags: d
 Source: "E:\Git\formulaufsm_dataSoftware\LICENSE"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "E:\Git\formulaufsm_dataSoftware\python-3.9.2-amd64.exe"; DestDir: "{app}"; Flags: deleteafterinstall ignoreversion recursesubdirs createallsubdirs
 Source: "E:\Git\formulaufsm_dataSoftware\README.MD"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\INSTALL_GUIDE.MD"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "E:\Git\formulaufsm_dataSoftware\setupbat2.bat"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.py.bat"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Git\formulaufsm_dataSoftware\FUFSMElectronics_SETUP.exe"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "E:\Git\formulaufsm_dataSoftware\FormulaUFSM_Electronics.exe"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
