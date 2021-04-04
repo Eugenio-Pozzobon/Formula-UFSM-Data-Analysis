@@ -15,7 +15,6 @@ import src.lic as lic
 import src.settings as settings
 import gc, sys
 
-#if __name__ == "main":
 if True:
     programGui.start_app()
 

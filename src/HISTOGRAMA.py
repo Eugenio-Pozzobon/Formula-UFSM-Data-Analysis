@@ -1,16 +1,11 @@
 #my_first_plot.py
-from bokeh.plotting import figure, output_file
-from bokeh.io import show, output_notebook
-from bokeh.models import ColumnDataSource, BoxSelectTool, Legend, LinearAxis, Range1d
-from bokeh.layouts import row, column, layout, gridplot
-from bokeh.models.widgets import Tabs, Panel
-from bokeh.io import curdoc
-
-from scipy.signal import sosfiltfilt
 import numpy as np
 import pandas as pd
-import scipy.special
 import src.programTools as ncuTools
+from bokeh.layouts import layout, gridplot
+from bokeh.models.widgets import Panel
+from bokeh.plotting import figure
+
 
 def suspHisto(data):
     TOOLTIPS = [

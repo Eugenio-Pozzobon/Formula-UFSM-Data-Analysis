@@ -13,32 +13,24 @@ from src.tabEngine import *
 from src.tabTTSU import *
 '''
 
-from src.programTools import *
-from src.programGui import *
-from src.ncuOpenLOGfile import *
-
-import time
-import zipfile
+import gc
 import os
+import pathlib
+import re
 import shutil
 import sys
-import gc
-import pathlib
-
-from bokeh.layouts import row, column, layout, gridplot
-from bokeh.io import save, show, curdoc
-from bokeh.plotting import figure, output_file
-from bokeh.models.widgets import Tabs, Panel, Button
-from bokeh.themes import built_in_themes
-from bokeh.models import RangeSlider, ColumnDataSource
-from bokeh.server.server import Server
+import zipfile
 
 import pandas as pd
-import re
 
-from bokeh.models import CustomJS, RangeSlider
-
-from src.graph import make_ncu_tabs, plot_layout_tab
+from bokeh.layouts import row
+from bokeh.models import RangeSlider, ColumnDataSource
+from bokeh.models.widgets import Tabs, Button
+from bokeh.server.server import Server
+from src.graph import make_ncu_tabs
+from src.ncuOpenLOGfile import *
+from src.programGui import *
+from src.programTools import *
 from src.userformula import user_equations
 import src.settings as settings
 
@@ -48,7 +40,7 @@ def startNCU():
     :return: none
     '''
     import tkinter as tk
-    from tkinter import filedialog, messagebox
+    from tkinter import filedialog
 
     # Allows the program to clean memory in the program
 

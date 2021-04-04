@@ -5,17 +5,14 @@
 # Licensed under the GNU General Public License v3.0
 
 import sys
-import time, threading
 from datetime import datetime
-import serial
-
-import src.settings as settings
-from src.programTools import *
-from src.wcuServerSocket import *
-from src.wcuClientSocket import *
 
 import pandas as pd
-from time import process_time
+import serial
+import src.settings as settings
+from src.programTools import *
+from src.wcuClientSocket import *
+from src.wcuServerSocket import *
 
 
 class ReadLine:

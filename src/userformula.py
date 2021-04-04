@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import src.settings as settings
 import src.programTools as programTools
 
 def user_equations(data):

@@ -1,23 +1,12 @@
-from bokeh.io import show, output_notebook
-from bokeh.document import Document
-from bokeh.embed import file_html
-from bokeh.models import Arc, Circle, ColumnDataSource, Plot, Range1d, Ray, Text
-from bokeh.resources import INLINE
-from bokeh.util.browser import view
-from bokeh.models import ColumnDataSource
-
-from bokeh.plotting import figure, output_file
-from bokeh.io import show, output_notebook
-from bokeh.models import ColumnDataSource, BoxSelectTool, Legend, LinearAxis, Range1d
-from bokeh.layouts import row, column, layout, gridplot
-from bokeh.models.widgets import Tabs, Panel
-from bokeh.io import curdoc
-from bokeh.models.layouts import Box
-from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d
-
-import pandas as pd
 import numpy as np
+import pandas as pd
 import src.settings as settings
+from bokeh.layouts import layout, gridplot
+from bokeh.models import LinearAxis
+from bokeh.models import Range1d
+from bokeh.models.widgets import Panel
+from bokeh.plotting import figure
+
 
 def plot_ncu_graph(title, labels, renderer, graphtools,
                    figure_plots,

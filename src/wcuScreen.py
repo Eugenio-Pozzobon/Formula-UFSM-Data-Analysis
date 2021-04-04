@@ -4,41 +4,28 @@
 # Linkedin: https://www.linkedin.com/in/eugeniopozzobon/
 # Licensed under the GNU General Public License v3.0
 
-from bokeh.plotting import figure, output_file
-from bokeh.layouts import row, column, layout
-from bokeh.io import curdoc
-from bokeh.models import Arc, Circle, ColumnDataSource, Plot, Range1d, Ray, Text, ImageURL, Image
-from bokeh.io import save, show, curdoc
-from bokeh.plotting import figure, output_file
-from bokeh.models import ImageURL
-from bokeh.models.widgets import Tabs, Panel
-from bokeh.themes import built_in_themes
-from bokeh.layouts import gridplot
-from bokeh.server.server import Server, BaseServer
-from bokeh.server.tornado import BokehTornado
-from bokeh.models.widgets import Button
-from bokeh.models import CustomJS, MultiSelect
-from bokeh.models import PreText
-from bokeh.models import Spinner
-from bokeh.models import RadioGroup
-
-from math import cos, pi, sin
-import time, threading
-import pandas as pd
-import os, gc, sys
+import os
+import sys
+import time
 from datetime import datetime
+from functools import partial
+from math import pi
 
+from bokeh.layouts import gridplot, row, column, layout
+from bokeh.models import ColumnDataSource ,MultiSelect ,RadioGroup, Spinner
+from bokeh.models.widgets import Tabs, Panel
+from bokeh.plotting import figure
+from bokeh.server.server import Server
+
+import pandas as pd
 import src.settings as settings
-from src.programGui import *
-from src.server_lifecycle import *
-from src.wcuSerial import *
 from src.gauges import *
 from src.graph import *
+from src.programGui import *
+from src.server_lifecycle import *
 from src.tabGPS import *
 from src.userformula import *
-
-from time import process_time
-from functools import partial
+from src.wcuSerial import *
 
 def endwculog():
     '''

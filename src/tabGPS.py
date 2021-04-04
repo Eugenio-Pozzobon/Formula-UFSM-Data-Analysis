@@ -1,23 +1,10 @@
 #my_first_plot.py
-from bokeh.plotting import figure, output_file, show
-from bokeh.io import show, output_notebook
-from bokeh.models import ColumnDataSource, BoxSelectTool, Legend, LinearAxis, Range1d
-from bokeh.layouts import row, column, layout
-from bokeh.models.widgets import Tabs, Panel
-from bokeh.io import curdoc
-from bokeh.layouts import gridplot
-from bokeh.models.layouts import Box
-
-import json
-
-from bokeh.models import GeoJSONDataSource
-from bokeh.sampledata.sample_geojson import geojson
-
-from scipy.signal import sosfiltfilt
-import numpy as np
 import pandas as pd
+from bokeh.layouts import layout
+from bokeh.models import Legend
+from bokeh.models.widgets import Panel
+from bokeh.plotting import figure
 
-import src.programTools as ncuTools
 
 def latlong(data):
     '''

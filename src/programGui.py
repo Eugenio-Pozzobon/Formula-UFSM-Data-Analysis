@@ -4,16 +4,8 @@
 # Linkedin: https://www.linkedin.com/in/eugeniopozzobon/
 # Licensed under the GNU General Public License v3.0
 
-import time
-import zipfile
-import os
-import shutil
-import sys
-import gc
-
 import tkinter as tk
 
-import src.settings as settings
 
 def start_app():
     global window, question
@@ -21,7 +13,7 @@ def start_app():
 
     window = tk.Tk()
     window.title("Formula UFSM Desktop APP")
-    window.geometry('1080x720')
+    window.geometry('1000x500')
 
 
 def call_lic():
@@ -76,22 +68,47 @@ def getuserselection():
         question = 'ncu'
         window.destroy()
 
+    filepath = "./projectfolder/settings.txt"
+    def open_file():
+        """Open a file for editing."""
+
+        if not filepath:
+            return
+        txt_edit.delete(1.0, tk.END)
+        with open(filepath, "r") as input_file:
+            text = input_file.read()
+            txt_edit.insert(tk.END, text)
+
+    def save_file():
+        """Save the current file as a new file."""
+        if not filepath:
+            return
+        with open(filepath, "w") as output_file:
+            text = txt_edit.get(1.0, tk.END)
+            output_file.write(text)
+
+
+    txt_edit = tk.Text(window)
+    open_file()
+    
+    btn_save = tk.Button(window, text="Save As...", command=save_file)
+
     btnwcu = tk.Button(window, text='WCU', command=WCUBUTTON, width = 25, height = 3 )
     btnlog = tk.Button(window, text='LOG (.WCU or .NCU FILES)', command=LOGBUTTON, width=25, height=3)
     btnncu = tk.Button(window, text='NCU CAN CSV DATA', command=NCUBUTTON, width=25, height=3)
+
 
     btnwcu.grid(column=0, row=10)
     btnlog.grid(column=335, row=10)
     btnncu.grid(column=720-50, row=10)
 
+    btn_save.grid(row=30, column=0, sticky="ew", padx=5)
+    txt_edit.grid(row=30, column=335, sticky="nsew")
+
     #run window
     window.mainloop()
 
-    '''
-    import serial.tools.list_ports
-    ports = serial.tools.list_ports.comports(include_links=False)
-    portWCU = ports[0].device
-
-    '''
+    #TODO: ADD SELECT COM PORT
+    #TODO: ADD CONFIGURATION SETTINGS FOR PLOT NCU GRAPHS
 
     return question

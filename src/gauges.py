@@ -1,16 +1,8 @@
 from math import cos, pi, sin
-import numpy as np
 
-from bokeh.io import show, output_notebook
-from bokeh.document import Document
-from bokeh.embed import file_html
 from bokeh.models import Arc, Circle, ColumnDataSource, Plot, Range1d, Ray, Text
-from bokeh.resources import INLINE
-from bokeh.util.browser import view
 from bokeh.plotting import figure
-from bokeh.models import ImageURL
 
-from os.path import dirname, join
 
 def plot_angle_image():
     xdr = Range1d(start=-1, end=1)

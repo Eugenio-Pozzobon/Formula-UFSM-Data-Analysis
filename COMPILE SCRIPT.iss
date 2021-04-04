@@ -29,6 +29,8 @@ Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 UninstallDisplayIcon={app}\projectfolder\icon.ico
+OutputBaseFilename=FUFSM_ini_setup
+ExtraDiskSpaceRequired=604857600 
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
