@@ -15,42 +15,42 @@ import src.lic as lic
 import src.settings as settings
 import gc, sys
 
-if True:
-    programGui.start_app()
 
-    program_version = '3.2'
+programGui.start_app()
 
-    '''
-    if isUpToDate('./README.MD', "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/README.MD") == False:
-       if programGui.get_update_preference():
-           update('./README.MD', "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/README.MD")
-    
-    '''
+program_version = '3.2'
 
-    # enable RAM cleaner
-    gc.enable()
+'''
+if isUpToDate('./README.MD', "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/README.MD") == False:
+   if programGui.get_update_preference():
+       update('./README.MD', "https://raw.githubusercontent.com/Eugenio-Pozzobon/Formula-UFSM-Data-Analysis/master/README.MD")
 
-    # get program settings
-    settings.init()
+'''
 
-    # check if user has license
-    if lic.checkLicense():
+# enable RAM cleaner
+gc.enable()
 
-        # get user mode selection
-        screen = programGui.getuserselection()
+# get program settings
+settings.init()
 
-        # run
-        if screen == 'wcu':
-            wcuScreen.runwcu()
-        if screen == 'ncu':
-            ncuOpenLOGfile.parseLogFile()
-        if screen == 'log':
-            ncuOpenReport.startNCU() # file selection and descompression
-            ncuOpenReport.runLogAnalysis() # file analysis
+# check if user has license
+if lic.checkLicense():
 
-    else:
-        #System out message
-        #input('LICENSE FILE REQUIRED\n\nPress Enter to Exit')
-        programGui.call_lic()
-        sys.exit()
+    # get user mode selection
+    screen = programGui.getuserselection()
+
+    # run
+    if screen == 'wcu':
+        wcuScreen.runwcu()
+    if screen == 'ncu':
+        ncuOpenLOGfile.parseLogFile()
+    if screen == 'log':
+        ncuOpenReport.startNCU() # file selection and descompression
+        ncuOpenReport.runLogAnalysis() # file analysis
+
+else:
+    #System out message
+    #input('LICENSE FILE REQUIRED\n\nPress Enter to Exit')
+    programGui.call_lic()
+    sys.exit()
 #--------

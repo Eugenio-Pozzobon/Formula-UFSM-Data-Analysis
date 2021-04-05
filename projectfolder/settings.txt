@@ -1,11 +1,18 @@
 server:False:
 client:False:
-bokehPort:5003:
-socketPort:8000:
+bokehPort:5006:
+socketPort:8080:
 socketIP:127.0.0.1:
 port:COM7:
 BoudRate:115200:
 ColorTheme:caliber:#Voce pode escolher entre-> caliber (normal), night_sky,light_minimal, dark_minimal,c ontrast;
+
+
+
+
+
+
+
 
 
 

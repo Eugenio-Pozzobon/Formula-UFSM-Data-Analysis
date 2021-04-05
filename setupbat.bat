@@ -39,7 +39,7 @@ cls
 
 python-3.9.2-amd64.exe
 
-py ./projectfolder/get-pip.py
+py get-pip.py
 
 py -m pip install -U pip
 

@@ -91,7 +91,7 @@ def getuserselection():
     txt_edit = tk.Text(window)
     open_file()
     
-    btn_save = tk.Button(window, text="Save As...", command=save_file)
+    btn_save = tk.Button(window, text="Save Settings", command=save_file)
 
     btnwcu = tk.Button(window, text='WCU', command=WCUBUTTON, width = 25, height = 3 )
     btnlog = tk.Button(window, text='LOG (.WCU or .NCU FILES)', command=LOGBUTTON, width=25, height=3)
