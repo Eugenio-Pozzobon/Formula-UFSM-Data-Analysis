@@ -37,16 +37,14 @@ settings.init()
 if lic.checkLicense():
 
     # get user mode selection
-    screen = programGui.getuserselection()
-
     # run
-    if screen == 'wcu':
+    if programGui.getuserselection() == 'wcu':
         wcuScreen.runwcu()
-    if screen == 'ncu':
+    if programGui.getuserselection() == 'ncu':
         ncuOpenLOGfile.parseLogFile()
-    if screen == 'log':
-        ncuOpenReport.startNCU() # file selection and descompression
-        ncuOpenReport.runLogAnalysis() # file analysis
+    if programGui.getuserselection() == 'log':
+        ncuOpenReport.startNCU()  # file selection and descompression
+        ncuOpenReport.runLogAnalysis()  # file analysis
 
 else:
     #System out message
