@@ -9,7 +9,7 @@ import tkinter as tk
 
 def start_app():
     global window, question
-    question = ''
+    question: str = ''
 
     window = tk.Tk()
     window.title("Formula UFSM Desktop APP")
@@ -22,11 +22,14 @@ def call_lic():
     tk.messagebox.showerror(title='Error', message='LICENSE FILE REQUIRED')
     root.destroy()
 
+
 def error_1_wcu():
     root = tk.Tk()
     root.withdraw()
-    tk.messagebox.showerror(title='Error', message='CANT START, CHECK COM PORT AND ALL OPTIONS AT PROJECTFOLDER/SETTINGS.TXT.')
+    tk.messagebox.showerror(title='Error',
+                            message='CANT START, CHECK COM PORT AND ALL OPTIONS AT PROJECTFOLDER/SETTINGS.TXT.')
     root.destroy()
+
 
 def error_2_wcu():
     root = tk.Tk()
@@ -34,11 +37,13 @@ def error_2_wcu():
     tk.messagebox.showerror(title='Error', message='You cant add more then 5 graphics')
     root.destroy()
 
+
 def warning_1_wcu():
     root = tk.Tk()
     root.withdraw()
     tk.messagebox.showerror(title='Error', message='You may have CPU delays with this value')
     root.destroy()
+
 
 def get_update_preference():
     root = tk.Tk()
@@ -46,13 +51,14 @@ def get_update_preference():
     tk.messagebox.askquestion('Update Available!', 'Do you wanna update for the next program version?')
     root.destroy()
 
+
 def getuserselection():
     '''
     Create the first screen to select between WCU, LOG, NCU mode for software
     :return: user selection
     '''
 
-    #define buttons functions
+    # define buttons functions
     def WCUBUTTON():
         global question
         question = 'wcu'
@@ -69,6 +75,7 @@ def getuserselection():
         window.destroy()
 
     filepath = "./projectfolder/settings.txt"
+
     def open_file():
         """Open a file for editing."""
 
@@ -87,28 +94,26 @@ def getuserselection():
             text = txt_edit.get(1.0, tk.END)
             output_file.write(text)
 
-
     txt_edit = tk.Text(window)
     open_file()
-    
+
     btn_save = tk.Button(window, text="Save Settings", command=save_file)
 
-    btnwcu = tk.Button(window, text='WCU', command=WCUBUTTON, width = 25, height = 3 )
+    btnwcu = tk.Button(window, text='WCU', command=WCUBUTTON, width=25, height=3)
     btnlog = tk.Button(window, text='LOG (.WCU or .NCU FILES)', command=LOGBUTTON, width=25, height=3)
     btnncu = tk.Button(window, text='NCU CAN CSV DATA', command=NCUBUTTON, width=25, height=3)
 
-
     btnwcu.grid(column=0, row=10)
     btnlog.grid(column=335, row=10)
-    btnncu.grid(column=720-50, row=10)
+    btnncu.grid(column=720 - 50, row=10)
 
     btn_save.grid(row=30, column=0, sticky="ew", padx=5)
     txt_edit.grid(row=30, column=335, sticky="nsew")
 
-    #run window
+    # run window
     window.mainloop()
 
-    #TODO: ADD SELECT COM PORT
-    #TODO: ADD CONFIGURATION SETTINGS FOR PLOT NCU GRAPHS
-
+    # TODO: ADD SELECT COM PORT
+    # TODO: ADD CONFIGURATION SETTINGS FOR PLOT NCU GRAPHS
+    global question
     return question
